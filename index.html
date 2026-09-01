@@ -36,7 +36,82 @@ textarea{min-height:170px;resize:vertical}.btn{margin-top:18px;padding:12px 18px
     <div class="card" data-tool="words"><div class="icon">🔢</div><h3>الأرقام إلى كلمات</h3><p>حوّل الرقم إلى كتابة عربية.</p></div>
     <div class="card" data-tool="counter"><div class="icon">📝</div><h3>عداد الكلمات والحروف</h3><p>احسب الكلمات والحروف والمسافات.</p></div>
   </div>
+<div class="tools">
+  <div class="card" data-tool="ai-translate">
+    <h3>🌐 مترجم ذكي</h3>
+    <p>ترجمة النصوص بسهولة</p>
+  </div>
 
+  <div class="card" data-tool="ai-simplify">
+    <h3>📝 تبسيط النص</h3>
+    <p>حوّل النص إلى أسلوب أبسط</p>
+  </div>
+
+  <div class="card" data-tool="ai-style">
+    <h3>✍️ تغيير أسلوب الكتابة</h3>
+    <p>غيّر أسلوب النص</p>
+  </div>
+
+  <div class="card" data-tool="ai-language">
+    <h3>🔍 كشف اللغة</h3>
+    <p>اكتشف لغة النص</p>
+  </div>
+
+  <div class="card" data-tool="ai-ideas">
+    <h3>💡 مولد أفكار للمحتوى</h3>
+    <p>احصل على أفكار جديدة</p>
+  </div>
+
+  <div class="card" data-tool="ai-rewrite">
+    <h3>🔄 إعادة صياغة النص</h3>
+    <p>أعد كتابة النص بطريقة مختلفة</p>
+  </div>
+
+  <div class="card" data-tool="ai-summarize">
+    <h3>📚 تلخيص الدروس</h3>
+    <p>اختصر الدروس والنصوص</p>
+  </div>
+
+  <div class="card" data-tool="ai-questions">
+    <h3>❓ استخراج الأسئلة</h3>
+    <p>استخرج الأسئلة من النص</p>
+  </div>
+
+  <div class="card" data-tool="ai-qa">
+    <h3>💬 إنشاء أسئلة وأجوبة</h3>
+    <p>أنشئ أسئلة وأجوبة تلقائياً</p>
+  </div>
+
+  <div class="card" data-tool="ai-explain">
+    <h3>🧠 شرح موضوع مبسط</h3>
+    <p>شرح الموضوع بطريقة سهلة</p>
+  </div>
+
+  <div class="card" data-tool="ai-flashcards">
+    <h3>🎴 بطاقات مراجعة</h3>
+    <p>أنشئ بطاقات للمراجعة</p>
+  </div>
+
+  <div class="card" data-tool="ai-code-explain">
+    <h3>💻 شرح الكود</h3>
+    <p>افهم الكود بسهولة</p>
+  </div>
+
+  <div class="card" data-tool="ai-code-fix">
+    <h3>🛠️ إصلاح أخطاء الكود</h3>
+    <p>ساعدك على فهم أخطاء الكود</p>
+  </div>
+
+  <div class="card" data-tool="ai-code-generate">
+    <h3>⚙️ توليد كود من وصف</h3>
+    <p>حوّل وصفك إلى كود</p>
+  </div>
+
+  <div class="card" data-tool="ai-error">
+    <h3>🚨 شرح رسالة الخطأ</h3>
+    <p>فسّر رسائل الأخطاء</p>
+  </div>
+</div>
   <section class="panel">
     <div id="age" class="tool">
       <h2>🧮 حاسبة العمر</h2>
@@ -86,7 +161,120 @@ textarea{min-height:170px;resize:vertical}.btn{margin-top:18px;padding:12px 18px
       <h2>📝 عداد الكلمات والحروف</h2>
       <textarea id="textInput" placeholder="اكتب أو الصق النص هنا..."></textarea>
       <div id="counterResult" class="result">ابدأ بالكتابة لرؤية الإحصائيات.</div>
-    </div>
+    </div><div id="ai-translate" class="tool hidden">
+  <h2>🌐 المترجم الذكي</h2>
+  <textarea id="translateText" placeholder="اكتب النص الذي تريد ترجمته..."></textarea>
+  <label>اللغة المطلوبة
+    <select id="translateLang">
+      <option value="en">الإنجليزية</option>
+      <option value="it">الإيطالية</option>
+      <option value="fr">الفرنسية</option>
+      <option value="de">الألمانية</option>
+      <option value="tr">التركية</option>
+      <option value="ar">العربية</option>
+    </select>
+  </label>
+  <button class="btn" onclick="translateText()">ترجم</button>
+  <div id="translateResult" class="result"></div>
+</div>
+
+<div id="ai-simplify" class="tool hidden">
+  <h2>📝 تبسيط النص</h2>
+  <textarea id="simplifyText" placeholder="الصق النص هنا..."></textarea>
+  <button class="btn">بسّط النص</button>
+  <div class="result">سيتم تشغيل الذكاء الاصطناعي بعد إعداد الربط الآمن.</div>
+</div>
+
+<div id="ai-style" class="tool hidden">
+  <h2>✍️ تغيير أسلوب الكتابة</h2>
+  <textarea placeholder="اكتب النص هنا..."></textarea>
+  <button class="btn">غيّر الأسلوب</button>
+  <div class="result">سيتم تشغيل الذكاء الاصطناعي بعد إعداد الربط الآمن.</div>
+</div>
+
+<div id="ai-language" class="tool hidden">
+  <h2>🔍 كشف اللغة</h2>
+  <textarea placeholder="اكتب النص هنا..."></textarea>
+  <button class="btn">كشف اللغة</button>
+  <div class="result">سيتم تشغيل الذكاء الاصطناعي بعد إعداد الربط الآمن.</div>
+</div>
+
+<div id="ai-ideas" class="tool hidden">
+  <h2>💡 مولد أفكار للمحتوى</h2>
+  <textarea placeholder="اكتب موضوع المحتوى..."></textarea>
+  <button class="btn">ولّد الأفكار</button>
+  <div class="result">سيتم تشغيل الذكاء الاصطناعي بعد إعداد الربط الآمن.</div>
+</div>
+
+<div id="ai-rewrite" class="tool hidden">
+  <h2>🔄 إعادة صياغة النص</h2>
+  <textarea placeholder="الصق النص هنا..."></textarea>
+  <button class="btn">أعد الصياغة</button>
+  <div class="result">سيتم تشغيل الذكاء الاصطناعي بعد إعداد الربط الآمن.</div>
+</div>
+
+<div id="ai-summarize" class="tool hidden">
+  <h2>📚 تلخيص الدروس</h2>
+  <textarea placeholder="الصق الدرس هنا..."></textarea>
+  <button class="btn">لخّص الدرس</button>
+  <div class="result">سيتم تشغيل الذكاء الاصطناعي بعد إعداد الربط الآمن.</div>
+</div>
+
+<div id="ai-questions" class="tool hidden">
+  <h2>❓ استخراج الأسئلة من النص</h2>
+  <textarea placeholder="الصق النص هنا..."></textarea>
+  <button class="btn">استخرج الأسئلة</button>
+  <div class="result">سيتم تشغيل الذكاء الاصطناعي بعد إعداد الربط الآمن.</div>
+</div>
+
+<div id="ai-qa" class="tool hidden">
+  <h2>💬 إنشاء أسئلة وأجوبة</h2>
+  <textarea placeholder="اكتب الموضوع أو الصق الدرس..."></textarea>
+  <button class="btn">أنشئ الأسئلة والأجوبة</button>
+  <div class="result">سيتم تشغيل الذكاء الاصطناعي بعد إعداد الربط الآمن.</div>
+</div>
+
+<div id="ai-explain" class="tool hidden">
+  <h2>🧠 شرح موضوع بطريقة مبسطة</h2>
+  <textarea placeholder="اكتب الموضوع الذي تريد شرحه..."></textarea>
+  <button class="btn">اشرح الموضوع</button>
+  <div class="result">سيتم تشغيل الذكاء الاصطناعي بعد إعداد الربط الآمن.</div>
+</div>
+
+<div id="ai-flashcards" class="tool hidden">
+  <h2>🎴 إنشاء بطاقات مراجعة</h2>
+  <textarea placeholder="الصق الدرس أو الموضوع..."></textarea>
+  <button class="btn">أنشئ البطاقات</button>
+  <div class="result">سيتم تشغيل الذكاء الاصطناعي بعد إعداد الربط الآمن.</div>
+</div>
+
+<div id="ai-code-explain" class="tool hidden">
+  <h2>💻 شرح الكود</h2>
+  <textarea placeholder="الصق الكود هنا..."></textarea>
+  <button class="btn">اشرح الكود</button>
+  <div class="result">سيتم تشغيل الذكاء الاصطناعي بعد إعداد الربط الآمن.</div>
+</div>
+
+<div id="ai-code-fix" class="tool hidden">
+  <h2>🛠️ إصلاح أخطاء الكود</h2>
+  <textarea placeholder="الصق الكود الذي يحتوي على الخطأ..."></textarea>
+  <button class="btn">حلّل الكود</button>
+  <div class="result">سيتم تشغيل الذكاء الاصطناعي بعد إعداد الربط الآمن.</div>
+</div>
+
+<div id="ai-code-generate" class="tool hidden">
+  <h2>⚙️ توليد كود من وصف</h2>
+  <textarea placeholder="صف ما تريد أن يفعله الكود..."></textarea>
+  <button class="btn">ولّد الكود</button>
+  <div class="result">سيتم تشغيل الذكاء الاصطناعي بعد إعداد الربط الآمن.</div>
+</div>
+
+<div id="ai-error" class="tool hidden">
+  <h2>🚨 شرح رسالة الخطأ</h2>
+  <textarea placeholder="الصق رسالة الخطأ هنا..."></textarea>
+  <button class="btn">اشرح الخطأ</button>
+  <div class="result">سيتم تشغيل الذكاء الاصطناعي بعد إعداد الربط الآمن.</div>
+</div>
   </section>
 </main>
 
