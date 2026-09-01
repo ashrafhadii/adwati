@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>أدواتي — أدوات عربية مجانية</title>
+<meta name="description" content="أدوات عربية مجانية وسريعة: حاسبة العمر، الفرق بين تاريخين، محول العملات، تحويل الأرقام إلى كلمات، وعدّ الكلمات والحروف.">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;background:#f5f7fb;color:#172033}
+header{background:linear-gradient(135deg,#243b7a,#4f67c8);color:#fff;padding:48px 20px;text-align:center}
+header h1{margin:0 0 10px;font-size:42px}header p{margin:0;font-size:18px;opacity:.92}
+.container{max-width:1100px;margin:0 auto;padding:28px 18px}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-bottom:28px}
+.card{background:#fff;border:1px solid #e6e9f0;border-radius:18px;padding:22px;box-shadow:0 5px 18px #1720330d;cursor:pointer;transition:.2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 25px #17203318}.card.active{border-color:#4f67c8}
+.icon{font-size:30px}.card h3{margin:10px 0 7px}.card p{margin:0;color:#697386;font-size:14px}
+.panel{background:#fff;border-radius:20px;padding:26px;box-shadow:0 5px 20px #17203312}
+.panel h2{margin-top:0}.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+label{font-weight:700;font-size:14px}input,select,textarea{width:100%;margin-top:7px;padding:12px;border:1px solid #d8dce5;border-radius:10px;font:inherit;background:#fff}
+textarea{min-height:170px;resize:vertical}.btn{margin-top:18px;padding:12px 18px;border:0;border-radius:10px;background:#4f67c8;color:#fff;font:inherit;font-weight:700;cursor:pointer}.btn:hover{background:#3e54ae}
+.result{margin-top:18px;padding:18px;border-radius:12px;background:#f0f3ff;line-height:1.9;min-height:52px}
+.hidden{display:none}.notice{color:#697386;font-size:13px;margin-top:12px}footer{text-align:center;color:#7a8291;padding:30px 15px}
+@media(max-width:600px){header h1{font-size:34px}.panel{padding:20px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>أدواتي</h1>
+  <p>أدوات عربية مجانية وسريعة — بدون تسجيل</p>
+</header>
+
+<main class="container">
+  <div class="tools">
+    <div class="card active" data-tool="age"><div class="icon">🧮</div><h3>حاسبة العمر</h3><p>احسب عمرك بالسنوات والأشهر والأيام.</p></div>
+    <div class="card" data-tool="date"><div class="icon">📅</div><h3>الفرق بين تاريخين</h3><p>اعرف المدة بين تاريخين.</p></div>
+    <div class="card" data-tool="currency"><div class="icon">💱</div><h3>محول العملات</h3><p>حوّل العملات باستخدام سعر تدخله بنفسك.</p></div>
+    <div class="card" data-tool="words"><div class="icon">🔢</div><h3>الأرقام إلى كلمات</h3><p>حوّل الرقم إلى كتابة عربية.</p></div>
+    <div class="card" data-tool="counter"><div class="icon">📝</div><h3>عداد الكلمات والحروف</h3><p>احسب الكلمات والحروف والمسافات.</p></div>
+  </div>
+
+  <section class="panel">
+    <div id="age" class="tool">
+      <h2>🧮 حاسبة العمر</h2>
+      <div class="form">
+        <label>تاريخ الميلاد<input id="birth" type="date"></label>
+        <label>احسب حتى<input id="ageAt" type="date"></label>
+      </div>
+      <button class="btn" onclick="calcAge()">احسب العمر</button>
+      <div id="ageResult" class="result">أدخل تاريخ الميلاد ثم اضغط «احسب العمر».</div>
+    </div>
+
+    <div id="date" class="tool hidden">
+      <h2>📅 الفرق بين تاريخين</h2>
+      <div class="form">
+        <label>التاريخ الأول<input id="date1" type="date"></label>
+        <label>التاريخ الثاني<input id="date2" type="date"></label>
+      </div>
+      <button class="btn" onclick="calcDateDiff()">احسب الفرق</button>
+      <div id="dateResult" class="result"></div>
+    </div>
+
+    <div id="currency" class="tool hidden">
+      <h2>💱 محول العملات</h2>
+      <div class="form">
+        <label>المبلغ<input id="amount" type="number" step="any" value="1"></label>
+        <label>من
+          <select id="from"><option>USD</option><option>IQD</option><option>EUR</option><option>TRY</option></select>
+        </label>
+        <label>إلى
+          <select id="to"><option>IQD</option><option>USD</option><option>EUR</option><option>TRY</option></select>
+        </label>
+        <label>سعر 1 من العملة الأولى بالعملة الثانية<input id="rate" type="number" step="any" placeholder="مثال: 1310"></label>
+      </div>
+      <button class="btn" onclick="convertCurrency()">حوّل</button>
+      <div id="currencyResult" class="result"></div>
+      <div class="notice">هذه النسخة لا تجلب أسعار السوق تلقائياً؛ أدخل السعر الذي تريد استخدامه. لاحقاً يمكن ربطها بمصدر أسعار حي.</div>
+    </div>
+
+    <div id="words" class="tool hidden">
+      <h2>🔢 تحويل الأرقام إلى كلمات</h2>
+      <label>أدخل رقماً<input id="numberInput" type="number" min="0" max="999999999" step="1" placeholder="مثال: 125"></label>
+      <button class="btn" onclick="numberToWordsUI()">حوّل إلى كلمات</button>
+      <div id="wordsResult" class="result"></div>
+    </div>
+
+    <div id="counter" class="tool hidden">
+      <h2>📝 عداد الكلمات والحروف</h2>
+      <textarea id="textInput" placeholder="اكتب أو الصق النص هنا..."></textarea>
+      <div id="counterResult" class="result">ابدأ بالكتابة لرؤية الإحصائيات.</div>
+    </div>
+  </section>
+</main>
+
+<footer>© 2026 أدواتي — النسخة الأولى</footer>
+
+<script>
+const cards=document.querySelectorAll('.card'), tools=document.querySelectorAll('.tool');
+cards.forEach(c=>c.addEventListener('click',()=>{cards.forEach(x=>x.classList.remove('active'));c.classList.add('active');tools.forEach(t=>t.classList.add('hidden'));document.getElementById(c.dataset.tool).classList.remove('hidden')}));
+const pad=n=>String(n).padStart(2,'0');
+function daysBetween(a,b){return Math.round(Math.abs(new Date(b)-new Date(a))/86400000)}
+function calcAge(){
+ const b=document.getElementById('birth').value, at=document.getElementById('ageAt').value||new Date().toISOString().slice(0,10);
+ if(!b){ageResult.textContent='أدخل تاريخ الميلاد أولاً.';return}
+ let birth=new Date(b+'T00:00:00'), end=new Date(at+'T00:00:00');
+ if(end<birth){ageResult.textContent='تاريخ الحساب يجب أن يكون بعد تاريخ الميلاد.';return}
+ let y=end.getFullYear()-birth.getFullYear(), m=end.getMonth()-birth.getMonth(), d=end.getDate()-birth.getDate();
+ if(d<0){m--; const prev=new Date(end.getFullYear(),end.getMonth(),0); d+=prev.getDate()}
+ if(m<0){y--;m+=12}
+ ageResult.innerHTML=`العمر: <b>${y}</b> سنة، <b>${m}</b> شهر، <b>${d}</b> يوم.`;
+}
+function calcDateDiff(){
+ const a=date1.value,b=date2.value;if(!a||!b){dateResult.textContent='أدخل التاريخين أولاً.';return}
+ const days=daysBetween(a,b); const years=Math.floor(days/365.2425);
+ dateResult.innerHTML=`الفرق التقريبي: <b>${days}</b> يوم، أي حوالي <b>${years}</b> سنة.`;
+}
+function convertCurrency(){
+ const a=parseFloat(amount.value),r=parseFloat(rate.value);
+ if(!Number.isFinite(a)||!Number.isFinite(r)||r<0){currencyResult.textContent='أدخل مبلغاً وسعراً صحيحين.';return}
+ currencyResult.innerHTML=`النتيجة: <b>${(a*r).toLocaleString('ar-IQ',{maximumFractionDigits:4})}</b> ${to.value}`;
+}
+const ones=['','واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة','عشرة','أحد عشر','اثنا عشر','ثلاثة عشر','أربعة عشر','خمسة عشر','ستة عشر','سبعة عشر','ثمانية عشر','تسعة عشر'];
+const tens=['','','عشرون','ثلاثون','أربعون','خمسون','ستون','سبعون','ثمانون','تسعون'];
+function under100(n){if(n<20)return ones[n];let t=Math.floor(n/10),o=n%10;return o?ones[o]+' و'+tens[t]:tens[t]}
+function under1000(n){if(n<100)return under100(n);let h=Math.floor(n/100),r=n%100,hs=['','مئة','مئتان','ثلاثمئة','أربعمئة','خمسمئة','ستمئة','سبعمئة','ثمانمئة','تسعمئة'];return hs[h]+(r?' و'+under100(r):'')}
+function numberToWords(n){
+ if(n===0)return 'صفر'; if(n<1000)return under1000(n);
+ let th=Math.floor(n/1000),r=n%1000,s='';
+ if(th===1)s='ألف'; else if(th===2)s='ألفان'; else if(th<11)s=under1000(th)+' آلاف'; else s=under1000(th)+' ألف';
+ if(r)s+=' و'+under1000(r); return s;
+}
+function numberToWordsUI(){let n=Number(numberInput.value);if(!Number.isInteger(n)||n<0||n>999999999){wordsResult.textContent='أدخل رقماً صحيحاً من 0 إلى 999,999,999.';return}wordsResult.innerHTML=`بالكلمات: <b>${numberToWords(n)}</b>`}
+textInput.addEventListener('input',()=>{const t=textInput.value, noSpace=t.replace(/\s/g,'');const words=t.trim()?t.trim().split(/\s+/).length:0;counterResult.innerHTML=`الكلمات: <b>${words}</b> — الحروف: <b>${noSpace.length}</b> — جميع الرموز مع المسافات: <b>${t.length}</b>`});
+ageAt.value=new Date().toISOString().slice(0,10);
+</script>
+</body>
+</html>
