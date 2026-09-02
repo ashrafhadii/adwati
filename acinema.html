@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Acinema — فهرس الأفلام والمسلسلات.">
+  <title>Acinema | عالم الأفلام والمسلسلات</title>
+  <style>
+    :root{--black:#0b0b0d;--panel:#151518;--panel-2:#202024;--gold:#d4af37;--gold-light:#f4d36a;--text:#f7f4ed;--muted:#aaa79f;--line:#343229}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--black);color:var(--text);font-family:Tahoma,Arial,sans-serif;line-height:1.6}button,input,select{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}.container{width:min(1200px,calc(100% - 32px));margin:auto}
+    header{position:sticky;top:0;z-index:20;background:#0b0b0df2;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}.nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-family:Georgia,serif;color:var(--gold);font-size:1.6rem;letter-spacing:-1px}.brand b{font-size:2.3rem;line-height:0}.brand span{font-size:1.15rem;color:var(--text);font-family:Tahoma,Arial,sans-serif;letter-spacing:0}nav{display:flex;gap:21px;color:#d5d1c7;font-size:.92rem}nav a:hover{color:var(--gold)}
+    .hero{min-height:410px;display:flex;align-items:end;padding:75px 0;background:linear-gradient(90deg,#0b0b0d 12%,#0b0b0da3 50%,#0b0b0d 100%),radial-gradient(ellipse at 75% 35%,#473a1e 0,transparent 35%),linear-gradient(140deg,#17120a,#0b0b0d 65%)}.hero-content{max-width:610px;padding-bottom:52px}.eyebrow{color:var(--gold-light);font-size:.85rem;font-weight:bold;letter-spacing:.5px}.hero h1{font-family:Georgia,serif;font-size:clamp(2.5rem,6vw,4.7rem);line-height:1.05;margin:11px 0}.hero p{margin:0;color:#d0cdc5;font-size:1.07rem}.hero-actions{display:flex;gap:11px;margin-top:24px}.button{border:1px solid var(--gold);border-radius:8px;padding:11px 19px;background:var(--gold);color:#1c1709;font-weight:bold}.button.secondary{background:transparent;color:var(--gold)}
+    main{padding:42px 0 75px}.search-row{display:grid;grid-template-columns:1fr auto;gap:12px;margin-bottom:24px}.search{position:relative}.search input{width:100%;padding:14px 47px 14px 16px;border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--text);outline:0}.search input:focus{border-color:var(--gold)}.search i{position:absolute;right:16px;top:10px;color:var(--gold);font-size:1.25rem;font-style:normal}.select{border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--text);padding:0 12px}
+    .filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:38px}.filter{border:1px solid var(--line);background:var(--panel);border-radius:999px;color:#d7d3ca;padding:7px 14px;font-size:.86rem}.filter:hover,.filter.active{color:#1c1709;background:var(--gold);border-color:var(--gold)}
+    .section{margin-top:37px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:16px}.section h2{margin:0;font-size:1.35rem}.section h2::before{content:'';display:inline-block;width:4px;height:22px;background:var(--gold);border-radius:5px;margin-left:9px;vertical-align:-5px}.section-head span{color:var(--gold);font-size:.85rem}
+    .posters{display:grid;grid-template-columns:repeat(6,1fr);gap:15px}.poster{min-width:0}.art{height:255px;border:1px solid #4a4230;border-radius:10px;background:var(--gradient);display:flex;align-items:end;padding:14px;position:relative;overflow:hidden;box-shadow:0 10px 24px #0005;transition:.22s}.art::before{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#000d,transparent 62%)}.art strong,.art small{z-index:1;position:relative}.art strong{font-family:Georgia,serif;font-size:1.25rem;line-height:1.15}.poster:hover .art{transform:translateY(-5px);border-color:var(--gold);box-shadow:0 14px 28px #000b}.poster p{margin:8px 2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.9rem}.poster small{color:var(--muted);font-size:.75rem}
+    .empty{display:none;border:1px dashed var(--line);border-radius:10px;padding:23px;text-align:center;color:var(--muted)}.about{margin-top:55px;border:1px solid #55451d;border-radius:14px;background:linear-gradient(135deg,#201b0d,#151518);padding:27px}.about h2{margin:0 0 5px;color:var(--gold)}.about p{margin:0;color:#d0cdc5}
+    footer{border-top:1px solid var(--line);padding:26px;text-align:center;color:var(--muted);font-size:.86rem}@media(max-width:980px){.posters{grid-template-columns:repeat(4,1fr)}}@media(max-width:650px){nav{display:none}.hero{min-height:350px}.posters{grid-template-columns:repeat(2,1fr)}.art{height:235px}.search-row{grid-template-columns:1fr}.select{height:43px}}
+  </style>
+</head>
+<body>
+  <header><div class="container nav"><a class="brand" href="#top"><b>A</b><span>cinema</span></a><nav><a href="#top">الرئيسية</a><a href="#catalog">الأفلام</a><a href="#catalog">المسلسلات</a><a href="#catalog">الأنمي</a><a href="#about">عن Acinema</a></nav></div></header>
+  <section class="hero" id="top"><div class="container hero-content"><span class="eyebrow">اكتشف عالم السينما</span><h1>كل قصة تستحق أن تُكتشف</h1><p>فهرس للأفلام والمسلسلات من العالم كله، منظّم حسب اللغة والنوع وما تحب مشاهدته.</p><div class="hero-actions"><a class="button" href="#catalog">استكشف الآن</a><a class="button secondary" href="#about">عن الموقع</a></div></div></section>
+  <main class="container" id="catalog"><div class="search-row"><div class="search"><i>⌕</i><input id="search" type="search" placeholder="ابحث عن فيلم أو مسلسل…"></div><select class="select" id="type"><option value="all">كل المحتوى</option><option value="movie">أفلام</option><option value="series">مسلسلات</option><option value="anime">أنمي</option><option value="doc">وثائقيات</option></select></div>
+    <div class="filters" id="filters"><button class="filter active" data-lang="all">كل اللغات</button><button class="filter" data-lang="عربي">عربي</button><button class="filter" data-lang="تركي">تركي</button><button class="filter" data-lang="كردي">كردي</button><button class="filter" data-lang="إيطالي">إيطالي</button><button class="filter" data-lang="إسباني">إسباني</button><button class="filter" data-lang="إنكليزي">إنكليزي</button><button class="filter" data-lang="أمريكي">أمريكي</button><button class="filter" data-lang="أنمي">أنمي</button><button class="filter" data-lang="Marvel">Marvel / MCU</button><button class="filter" data-lang="Disney">Disney</button></div>
+    <section class="section"><div class="section-head"><h2>الأعمال المقترحة</h2><span id="count"></span></div><div class="posters" id="posters"></div><div id="empty" class="empty">ما لقينا نتيجة بهذه المواصفات.</div></section>
+    <section class="about" id="about"><h2>عن Acinema</h2><p>هذه واجهة الفهرس الأولية. عند ربط مصدر بيانات مرخّص، ستظهر بوسترات ومعلومات حقيقية ونتائج جديدة تلقائياً دون إضافتها يدوياً.</p></section>
+  </main>
+  <footer>© <span id="year"></span> Acinema — فهرس سينمائي. 🇮🇶<br>قبلة المطوّر: أشرف</footer>
+  <script>
+    const titles=[
+      ['Dune: Part Two','movie','أمريكي','خيال علمي','linear-gradient(155deg,#c58d45,#2d160f)'],
+      ['The Bear','series','أمريكي','دراما','linear-gradient(155deg,#c04f26,#21100d)'],
+      ['The Boy and the Heron','anime','أنمي','أنمي','linear-gradient(155deg,#5e8eac,#182635)'],
+      ['The Creator','movie','إنكليزي','خيال علمي','linear-gradient(155deg,#dd7042,#251718)'],
+      ['Culpa Mía','movie','إسباني','رومانسي','linear-gradient(155deg,#d06c71,#29131a)'],
+      ['The Godfather','movie','إيطالي','جريمة','linear-gradient(155deg,#8b6e45,#17120d)'],
+      ['Yargı','series','تركي','دراما','linear-gradient(155deg,#5c7685,#141d24)'],
+      ['Oppenheimer','movie','إنكليزي','دراما','linear-gradient(155deg,#d66e2b,#21130d)'],
+      ['Shang-Chi','movie','Marvel','أكشن','linear-gradient(155deg,#be3032,#1b090b)'],
+      ['Loki','series','Marvel','خيال','linear-gradient(155deg,#789a48,#121c0d)'],
+      ['Encanto','movie','Disney','عائلي','linear-gradient(155deg,#b15bb4,#292042)'],
+      ['Free Solo','doc','أمريكي','وثائقي','linear-gradient(155deg,#6f8b9e,#17232b)']
+    ];
+    const posters=document.querySelector('#posters'),search=document.querySelector('#search'),type=document.querySelector('#type'),count=document.querySelector('#count'),empty=document.querySelector('#empty');let language='all';
+    function draw(){let q=search.value.trim().toLowerCase(),shown=titles.filter(x=>(language==='all'||x[2]===language)&&(type.value==='all'||x[1]===type)&&x.join(' ').toLowerCase().includes(q));posters.innerHTML=shown.map(x=>'<article class="poster"><div class="art" style="--gradient:'+x[4]+'"><strong>'+x[0]+'</strong></div><p>'+x[0]+'</p><small>'+x[2]+' · '+x[3]+'</small></article>').join('');count.textContent=shown.length+' عمل';empty.style.display=shown.length?'none':'block'}
+    search.oninput=draw;type.onchange=draw;document.querySelectorAll('.filter').forEach(b=>b.onclick=()=>{language=b.dataset.lang;document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===b));draw()});document.querySelector('#year').textContent=new Date().getFullYear();draw();
+  </script>
+</body></html>
