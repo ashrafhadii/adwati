@@ -1,5 +1,1918 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Acinema</title><style>
-:root{--g:#d4af37;--b:#090909;--p:#171717;--t:#f4f1e9;--m:#aaa}*{box-sizing:border-box}body{margin:0;background:var(--b);color:var(--t);font-family:Tahoma,Arial}.c{max-width:1200px;margin:auto;padding:0 18px}header{height:72px;border-bottom:1px solid #342b15;display:flex;align-items:center;justify-content:space-between}.logo{font:2rem Georgia;color:var(--g)}.logo b{font-size:2.8rem}.logo small{color:#fff;font:1.2rem Tahoma}nav a{color:#ddd;text-decoration:none;margin-right:17px}.hero{min-height:390px;display:flex;align-items:center;justify-content:center;text-align:center;background:radial-gradient(circle at 73% 37%,#4b3915,transparent 28%),linear-gradient(90deg,#090909,#09090988,#090909)}.quote{font:clamp(1.2rem,2.8vw,2.2rem) Georgia;line-height:1.55;color:#ddd}.quote span{display:block}.quote span+span{margin-top:4px}.quote em{display:block;margin-bottom:14px;color:var(--g);font:700 .8rem Tahoma;font-style:normal;letter-spacing:1px}main{padding:42px 0}h2{color:var(--g)}.search{width:100%;padding:14px;border:1px solid #4a4027;border-radius:8px;background:var(--p);color:#fff;font:inherit}.group{margin:20px 0}.group b{display:block;color:#ddd;margin-bottom:8px}.chip{border:1px solid #4a4027;border-radius:99px;background:#171717;color:#ddd;padding:8px 13px;margin:3px;cursor:pointer}.chip.on,.chip:hover{background:var(--g);color:#111;border-color:var(--g)}.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}.card{cursor:pointer}.poster{height:245px;border:1px solid #534522;border-radius:9px;background:var(--bg);display:flex;align-items:end;padding:13px;box-shadow:inset 0 -85px 55px #000b}.poster strong{font:1.1rem Georgia}.card p{margin:7px 0 0;color:#ddd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.card small{color:#aaa}.empty{display:none;color:#aaa;padding:30px;text-align:center}footer{text-align:center;color:#aaa;border-top:1px solid #342b15;padding:22px}@media(max-width:850px){.grid{grid-template-columns:repeat(4,1fr)}}@media(max-width:550px){nav{display:none}.grid{grid-template-columns:repeat(2,1fr)}.poster{height:220px}}
-</style></head><body><header class="c"><div class="logo"><b>A</b><small>cinema</small></div><nav><a href="index.html">أدواتي</a><a href="#catalog">استكشف</a></nav></header><section class="hero"><div class="c quote"><em>ACINEMA</em><span>But It's hard to stay mad,</span><span>when there's so much beauty in the world</span></div></section><main class="c" id="catalog"><h2>استكشف الأعمال</h2><input id="q" class="search" placeholder="ابحث عن فيلم أو مسلسل…"><div class="group"><b>اللغة</b><div id="lang"><button class="chip on" data-x="all">كل اللغات</button><button class="chip" data-x="اجنبي">أجنبي</button><button class="chip" data-x="عربي">عربي</button><button class="chip" data-x="اسباني">إسباني</button><button class="chip" data-x="كيدراما">كيدراما</button><button class="chip" data-x="ايطالي">إيطالي</button><button class="chip" data-x="تركي">تركي</button><button class="chip" data-x="فارسي">فارسي</button><button class="chip" data-x="كردي">كردي</button></div></div><div class="group"><b>النوع</b><div id="genre"><button class="chip on" data-x="all">كل الأنواع</button><button class="chip" data-x="اكشن">أكشن</button><button class="chip" data-x="اثارة">إثارة</button><button class="chip" data-x="رعب">رعب</button><button class="chip" data-x="كوميدي">كوميدي</button><button class="chip" data-x="دراما">دراما</button><button class="chip" data-x="وثائقي">وثائقي</button><button class="chip" data-x="انمي">أنمي</button><button class="chip" data-x="نتفلكس">نتفلكس</button></div></div><div class="grid" id="grid"></div><div class="empty" id="empty">لا توجد نتائج بهذه المواصفات.</div></main><footer>© 2026 Acinema · 🇮🇶<br>قبلة المطوّر</footer><script>
-const d=[['Dune: Part Two','اجنبي','اكشن','#a7662a'],['Yargı','تركي','دراما','#365363'],['Culpa Mía','اسباني','كوميدي','#a64357'],['The Glory','كيدراما','اثارة','#3e304e'],['Oppenheimer','اجنبي','دراما','#a54c1e'],['Encanto','اجنبي','كوميدي','#7043a0'],['The Godfather','ايطالي','دراما','#5c452d'],['Attack on Titan','اجنبي','انمي','#394637'],['Free Solo','اجنبي','وثائقي','#426478'],['The Last of Us','اجنبي','نتفلكس','#446a52'],['الفيل الأزرق','عربي','اثارة','#27405a'],['آفساينه','كردي','دراما','#754831']];let l='all',g='all';const grid=document.querySelector('#grid'),q=document.querySelector('#q');function draw(){let a=d.filter(x=>(l==='all'||x[1]===l)&&(g==='all'||x[2]===g)&&x.join(' ').toLowerCase().includes(q.value.toLowerCase()));grid.innerHTML=a.map(x=>'<article class="card"><div class="poster" style="--bg:linear-gradient(145deg,'+x[3]+',#111)"><strong>'+x[0]+'</strong></div><p>'+x[0]+'</p><small>'+x[1]+' · '+x[2]+'</small></article>').join('');empty.style.display=a.length?'none':'block'}function bind(id,set){document.querySelectorAll('#'+id+' .chip').forEach(b=>b.onclick=()=>{set(b.dataset.x);document.querySelectorAll('#'+id+' .chip').forEach(x=>x.classList.toggle('on',x===b));draw()})}bind('lang',x=>l=x);bind('genre',x=>g=x);q.oninput=draw;draw();
-</script><script>document.querySelector('.quote span').textContent="But It's hard to stay mad";</script></body></html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ACinema - أفلام ومسلسلات مع البحث والتفاصيل والبوسترات">
+<title>ACinema | أفلام ومسلسلات</title>
+
+<style>
+:root{
+  --bg:#050505;
+  --bg2:#0c0c0c;
+  --card:#111;
+  --gold:#d4af37;
+  --gold2:#f0cf5c;
+  --text:#fff;
+  --muted:#aaa;
+  --border:#242424;
+  --danger:#c94b4b;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  background:
+    radial-gradient(circle at top,#18130a 0,#050505 35%,#000 100%);
+  color:var(--text);
+  font-family:Tahoma,Arial,sans-serif;
+  min-height:100vh;
+}
+
+button,input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* HEADER */
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(5,5,5,.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(212,175,55,.25);
+}
+
+.header-inner{
+  max-width:1450px;
+  margin:auto;
+  padding:18px 25px;
+  display:flex;
+  align-items:center;
+  gap:25px;
+}
+
+.logo{
+  color:var(--gold);
+  font-size:30px;
+  font-weight:900;
+  white-space:nowrap;
+  letter-spacing:-1px;
+}
+
+.logo span{
+  color:#fff;
+}
+
+.search-wrap{
+  flex:1;
+  max-width:700px;
+  margin:auto;
+  position:relative;
+}
+
+#search{
+  width:100%;
+  background:#111;
+  color:#fff;
+  border:1px solid #333;
+  border-radius:30px;
+  padding:14px 50px 14px 20px;
+  outline:none;
+  transition:.2s;
+}
+
+#search:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(212,175,55,.1);
+}
+
+.search-icon{
+  position:absolute;
+  right:18px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--gold);
+  font-size:20px;
+}
+
+.login-btn{
+  border:1px solid var(--gold);
+  background:transparent;
+  color:var(--gold);
+  border-radius:22px;
+  padding:10px 20px;
+  white-space:nowrap;
+}
+
+.login-btn:hover{
+  background:var(--gold);
+  color:#000;
+}
+
+/* HERO */
+.hero{
+  max-width:1450px;
+  margin:30px auto;
+  padding:55px 30px;
+  min-height:300px;
+  border:1px solid rgba(212,175,55,.25);
+  border-radius:24px;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.98),rgba(0,0,0,.68)),
+    radial-gradient(circle at 80% 30%,#55430f,#090909 50%);
+  display:flex;
+  align-items:center;
+}
+
+.hero-content{
+  max-width:720px;
+}
+
+.hero h1{
+  color:var(--gold);
+  font-size:46px;
+  margin-bottom:15px;
+}
+
+.hero p{
+  color:#ddd;
+  line-height:1.9;
+  font-size:18px;
+}
+
+.hero-quote{
+  margin-top:20px;
+  color:#aaa;
+  font-style:italic;
+  line-height:1.8;
+}
+
+/* FILTERS */
+.filters{
+  max-width:1450px;
+  margin:25px auto;
+  padding:0 25px;
+}
+
+.filter-title{
+  color:var(--gold);
+  font-size:20px;
+  margin:20px 0 12px;
+}
+
+.chips{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+.chip{
+  border:1px solid #333;
+  background:#0d0d0d;
+  color:#ccc;
+  padding:9px 15px;
+  border-radius:20px;
+  transition:.2s;
+}
+
+.chip:hover,
+.chip.active{
+  background:var(--gold);
+  color:#000;
+  border-color:var(--gold);
+}
+
+/* CONTENT */
+.container{
+  max-width:1450px;
+  margin:auto;
+  padding:0 25px 50px;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  margin:35px 0 20px;
+}
+
+.section-head h2{
+  color:var(--gold);
+}
+
+#resultInfo{
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:22px;
+}
+
+.card{
+  background:linear-gradient(145deg,#151515,#090909);
+  border:1px solid #242424;
+  border-radius:15px;
+  overflow:hidden;
+  transition:.25s;
+  cursor:pointer;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  border-color:var(--gold);
+  box-shadow:0 10px 35px rgba(212,175,55,.15);
+}
+
+.poster{
+  width:100%;
+  aspect-ratio:2/3;
+  background:#111;
+  position:relative;
+  overflow:hidden;
+}
+
+.poster img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.poster-placeholder{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#777;
+  padding:20px;
+}
+
+.card-info{
+  padding:13px;
+}
+
+.card-title{
+  color:#fff;
+  font-weight:bold;
+  line-height:1.5;
+  min-height:45px;
+}
+
+.card-meta{
+  margin-top:7px;
+  color:#999;
+  font-size:13px;
+}
+
+.rating{
+  color:var(--gold);
+  margin-top:7px;
+}
+
+/* PAGINATION */
+.pagination{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  margin:35px 0;
+}
+
+.page-btn{
+  background:#111;
+  border:1px solid #333;
+  color:#fff;
+  padding:10px 18px;
+  border-radius:8px;
+}
+
+.page-btn:hover:not(:disabled){
+  border-color:var(--gold);
+  color:var(--gold);
+}
+
+.page-btn:disabled{
+  opacity:.35;
+  cursor:not-allowed;
+}
+
+#pageNumber{
+  color:var(--gold);
+  font-weight:bold;
+}
+
+/* LOADING */
+.loading{
+  text-align:center;
+  padding:70px 20px;
+  color:var(--gold);
+  font-size:20px;
+}
+
+.spinner{
+  width:45px;
+  height:45px;
+  border:4px solid #333;
+  border-top-color:var(--gold);
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+  margin:0 auto 18px;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+.empty{
+  text-align:center;
+  color:#888;
+  padding:70px 20px;
+  font-size:18px;
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.88);
+  backdrop-filter:blur(8px);
+  z-index:500;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(1050px,100%);
+  max-height:92vh;
+  overflow:auto;
+  background:#0b0b0b;
+  border:1px solid rgba(212,175,55,.5);
+  border-radius:20px;
+  box-shadow:0 25px 80px rgba(0,0,0,.8);
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  left:18px;
+  top:15px;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:1px solid #444;
+  background:#111;
+  color:#fff;
+  font-size:25px;
+  z-index:3;
+}
+
+.close:hover{
+  background:var(--gold);
+  color:#000;
+}
+
+.details{
+  display:grid;
+  grid-template-columns:280px 1fr;
+  gap:30px;
+  padding:30px;
+}
+
+.details-poster{
+  width:100%;
+  border-radius:12px;
+  overflow:hidden;
+  background:#111;
+}
+
+.details-poster img{
+  width:100%;
+  display:block;
+}
+
+.details-content h2{
+  color:var(--gold);
+  font-size:32px;
+  margin-bottom:8px;
+  padding-left:50px;
+}
+
+.subtitle{
+  color:#999;
+  margin-bottom:20px;
+}
+
+.info-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:15px;
+}
+
+.info-badge{
+  background:#161616;
+  border:1px solid #2b2b2b;
+  padding:7px 11px;
+  border-radius:8px;
+  color:#ddd;
+  font-size:13px;
+}
+
+.info-badge strong{
+  color:var(--gold);
+}
+
+.detail-title{
+  color:var(--gold);
+  margin:20px 0 8px;
+  font-size:19px;
+}
+
+.overview{
+  color:#ddd;
+  line-height:2;
+}
+
+.people{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.person{
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:8px;
+  padding:8px 10px;
+  color:#ddd;
+  font-size:13px;
+}
+
+.seasons{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:10px;
+}
+
+.season{
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:8px;
+  padding:10px;
+}
+
+.season b{
+  color:var(--gold);
+}
+
+.season small{
+  color:#aaa;
+  display:block;
+  margin-top:5px;
+}
+
+/* LOGIN */
+.login-box{
+  width:min(430px,100%);
+  background:#0c0c0c;
+  border:1px solid var(--gold);
+  border-radius:18px;
+  padding:30px;
+}
+
+.login-box h2{
+  color:var(--gold);
+  margin-bottom:20px;
+}
+
+.login-box input{
+  width:100%;
+  background:#111;
+  color:#fff;
+  border:1px solid #333;
+  border-radius:8px;
+  padding:13px;
+  margin-bottom:12px;
+  outline:none;
+}
+
+.login-box input:focus{
+  border-color:var(--gold);
+}
+
+.login-submit{
+  width:100%;
+  background:var(--gold);
+  color:#000;
+  border:0;
+  border-radius:8px;
+  padding:13px;
+  font-weight:bold;
+}
+
+.login-note{
+  color:#888;
+  margin-top:15px;
+  font-size:13px;
+  line-height:1.7;
+}
+
+/* FOOTER */
+footer{
+  border-top:1px solid #222;
+  margin-top:30px;
+  padding:35px 20px;
+  text-align:center;
+  color:#777;
+}
+
+footer strong{
+  color:var(--gold);
+}
+
+/* MOBILE */
+@media(max-width:700px){
+  .header-inner{
+    flex-wrap:wrap;
+    padding:14px;
+  }
+
+  .logo{
+    font-size:24px;
+  }
+
+  .search-wrap{
+    order:3;
+    flex-basis:100%;
+  }
+
+  .hero{
+    margin:15px;
+    padding:35px 20px;
+  }
+
+  .hero h1{
+    font-size:34px;
+  }
+
+  .container,
+  .filters{
+    padding-left:15px;
+    padding-right:15px;
+  }
+
+  .grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+  }
+
+  .details{
+    grid-template-columns:1fr;
+    padding:20px;
+  }
+
+  .details-poster{
+    max-width:250px;
+    margin:auto;
+  }
+
+  .details-content h2{
+    font-size:25px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <div class="logo">
+      AC<span>inema</span>
+    </div>
+
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input
+        id="search"
+        type="search"
+        placeholder="ابحث عن فيلم أو مسلسل..."
+        autocomplete="off">
+    </div>
+
+    <button class="login-btn" onclick="openLogin()">
+      تسجيل الدخول
+    </button>
+
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>ACinema</h1>
+
+    <p>
+      اكتشف آلاف الأفلام والمسلسلات،
+      وابحث عن أعمالك المفضلة وشاهد تفاصيلها
+      من القصة والتقييم والممثلين والمخرج.
+    </p>
+
+    <div class="hero-quote">
+      But It's hard to stay mad,<br>
+      when there's so much beauty in the world
+    </div>
+  </div>
+</section>
+
+<section class="filters">
+
+  <div class="filter-title">اللغات</div>
+
+  <div class="chips" id="languageChips">
+    <button class="chip active" data-lang="all">كل اللغات</button>
+    <button class="chip" data-lang="en">أجنبي</button>
+    <button class="chip" data-lang="ar">عربي</button>
+    <button class="chip" data-lang="es">إسباني</button>
+    <button class="chip" data-lang="ko">كيدراما</button>
+    <button class="chip" data-lang="it">إيطالي</button>
+    <button class="chip" data-lang="tr">تركي</button>
+    <button class="chip" data-lang="fa">فارسي</button>
+    <button class="chip" data-lang="ku">كردي</button>
+  </div>
+
+  <div class="filter-title">الأنواع</div>
+
+  <div class="chips" id="genreChips">
+    <button class="chip active" data-genre="all">كل الأنواع</button>
+    <button class="chip" data-genre="28">أكشن</button>
+    <button class="chip" data-genre="53">إثارة</button>
+    <button class="chip" data-genre="27">رعب</button>
+    <button class="chip" data-genre="35">كوميدي</button>
+    <button class="chip" data-genre="18">دراما</button>
+    <button class="chip" data-genre="99">وثائقي</button>
+    <button class="chip" data-genre="16">أنمي</button>
+    <button class="chip" data-genre="netflix">نتفلكس</button>
+  </div>
+
+</section>
+
+<main class="container">
+
+  <div class="section-head">
+    <h2>الأفلام والمسلسلات</h2>
+    <div id="resultInfo">جاري التحميل...</div>
+  </div>
+
+  <div id="loading" class="loading">
+    <div class="spinner"></div>
+    جاري تحميل الأفلام والمسلسلات...
+  </div>
+
+  <div id="grid" class="grid"></div>
+
+  <div id="empty" class="empty" style="display:none">
+    لم يتم العثور على نتائج.
+  </div>
+
+  <div class="pagination">
+    <button class="page-btn" id="prevBtn" onclick="changePage(-1)">
+      السابق
+    </button>
+
+    <span id="pageNumber">1</span>
+
+    <button class="page-btn" id="nextBtn" onclick="changePage(1)">
+      التالي
+    </button>
+  </div>
+
+</main>
+
+<footer>
+  <strong>ACinema</strong>
+  <br><br>
+  جميع المعلومات والبيانات يتم جلبها عبر TMDB.
+</footer>
+
+
+<!-- DETAILS MODAL -->
+<div class="modal" id="detailsModal" onclick="closeModalOutside(event)">
+
+  <div class="modal-box">
+
+    <button class="close" onclick="closeDetails()">×</button>
+
+    <div id="detailsLoading" class="loading">
+      <div class="spinner"></div>
+      جاري تحميل التفاصيل...
+    </div>
+
+    <div id="detailsContent" class="details" style="display:none">
+
+      <div class="details-poster">
+        <img id="detailPoster" src="" alt="">
+      </div>
+
+      <div class="details-content">
+
+        <h2 id="detailTitle"></h2>
+
+        <div class="subtitle" id="detailOriginalTitle"></div>
+
+        <div class="info-row">
+
+          <div class="info-badge">
+            <strong>النوع:</strong>
+            <span id="detailType"></span>
+          </div>
+
+          <div class="info-badge">
+            <strong>السنة:</strong>
+            <span id="detailYear"></span>
+          </div>
+
+          <div class="info-badge">
+            <strong>التقييم:</strong>
+            ⭐ <span id="detailRating"></span>
+          </div>
+
+          <div class="info-badge">
+            <strong>اللغة:</strong>
+            <span id="detailLanguage"></span>
+          </div>
+
+          <div class="info-badge" id="runtimeBadge">
+            <strong>المدة:</strong>
+            <span id="detailRuntime"></span>
+          </div>
+
+        </div>
+
+        <div class="detail-title">التصنيفات</div>
+        <div class="people" id="detailGenres"></div>
+
+        <div class="detail-title">القصة</div>
+        <div class="overview" id="detailOverview"></div>
+
+        <div class="detail-title" id="directorTitle">
+          الإخراج
+        </div>
+
+        <div class="people" id="detailDirector"></div>
+
+        <div class="detail-title">
+          الممثلون
+        </div>
+
+        <div class="people" id="detailCast"></div>
+
+        <div id="tvSection" style="display:none">
+
+          <div class="detail-title">
+            المواسم والحلقات
+          </div>
+
+          <div class="info-row">
+            <div class="info-badge">
+              <strong>المواسم:</strong>
+              <span id="detailSeasonsCount"></span>
+            </div>
+
+            <div class="info-badge">
+              <strong>الحلقات:</strong>
+              <span id="detailEpisodesCount"></span>
+            </div>
+          </div>
+
+          <div class="seasons" id="seasonsList"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- LOGIN MODAL -->
+<div class="modal" id="loginModal" onclick="closeLoginOutside(event)">
+
+  <div class="login-box">
+
+    <button class="close" onclick="closeLogin()">×</button>
+
+    <h2>تسجيل الدخول</h2>
+
+    <input
+      id="loginEmail"
+      type="email"
+      placeholder="البريد الإلكتروني">
+
+    <input
+      id="loginPassword"
+      type="password"
+      placeholder="كلمة المرور">
+
+    <button class="login-submit" onclick="fakeLogin()">
+      دخول
+    </button>
+
+    <div class="login-note">
+      تسجيل الدخول هنا واجهة فقط حاليًا.
+      إذا أردت نظام حسابات حقيقي نربطه لاحقًا بقاعدة بيانات.
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+/*
+==========================================================
+  ACinema TMDB
+==========================================================
+
+  ضع توكن TMDB الخاص بك هنا.
+
+  ملاحظة:
+  إذا رفعت هذا الملف على GitHub Pages،
+  التوكن سيكون ظاهرًا داخل كود الموقع للزوار.
+
+==========================================================
+*/
+
+const TMDB_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhOWEwOTc5ZDk5NTRjY2NiZjVhMjgwNWMzMWVlODlkYyIsIm5iZiI6MTc4ODM3NzI5OC44MjgsInN1YiI6IjZhOTg3OGQyYzM0Yzk3NWIzNzllNmVkNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MuTrqXBi8IJtXCdsKkwW2ZQwDOavaMD0zhrJQ2nZ1GY";
+
+const API_BASE = "https://api.themoviedb.org/3";
+const IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
+const BACKDROP_BASE = "https://image.tmdb.org/t/p/original";
+
+const headers = {
+  "Authorization": "Bearer " + TMDB_TOKEN,
+  "accept": "application/json"
+};
+
+
+/* الحالة */
+let currentPage = 1;
+let totalPages = 1;
+
+let currentLanguage = "all";
+let currentGenre = "all";
+let currentSearch = "";
+
+let searchTimer = null;
+
+
+/* أسماء اللغات */
+const languageNames = {
+  ar: "العربية",
+  en: "الإنجليزية",
+  es: "الإسبانية",
+  it: "الإيطالية",
+  tr: "التركية",
+  ko: "الكورية",
+  fa: "الفارسية",
+  ku: "الكردية",
+  ja: "اليابانية",
+  zh: "الصينية",
+  fr: "الفرنسية",
+  de: "الألمانية",
+  hi: "الهندية",
+  pt: "البرتغالية",
+  ru: "الروسية"
+};
+
+
+/* تحميل أولي */
+document.addEventListener("DOMContentLoaded", () => {
+
+  if (
+    !TMDB_TOKEN ||
+    TMDB_TOKEN === "ضع_توكن_TMDB_هنا"
+  ) {
+    showTokenMessage();
+  } else {
+    loadContent();
+  }
+
+  setupFilters();
+
+  document
+    .getElementById("search")
+    .addEventListener("input", function(){
+
+      clearTimeout(searchTimer);
+
+      currentSearch = this.value.trim();
+
+      searchTimer = setTimeout(() => {
+
+        currentPage = 1;
+        loadContent();
+
+      }, 500);
+
+    });
+
+});
+
+
+/* رسالة التوكن */
+function showTokenMessage(){
+
+  document.getElementById("loading").style.display = "none";
+
+  document.getElementById("resultInfo").textContent =
+    "ضع توكن TMDB داخل الكود";
+
+  document.getElementById("empty").style.display = "block";
+
+  document.getElementById("empty").innerHTML = `
+    <div style="color:#d4af37;font-size:22px;margin-bottom:12px">
+      يحتاج توكن TMDB
+    </div>
+
+    <div style="line-height:2;color:#999">
+      افتح ملف acinema.html وابحث عن:
+      <br><br>
+
+      <code style="color:#fff">
+      const TMDB_TOKEN = "ضع_توكن_TMDB_هنا";
+      </code>
+
+      <br><br>
+
+      ثم ضع التوكن الخاص بك بين علامات الاقتباس.
+    </div>
+  `;
+
+}
+
+
+/* الفلاتر */
+function setupFilters(){
+
+  document
+    .querySelectorAll("#languageChips .chip")
+    .forEach(btn => {
+
+      btn.addEventListener("click", () => {
+
+        document
+          .querySelectorAll("#languageChips .chip")
+          .forEach(x => x.classList.remove("active"));
+
+        btn.classList.add("active");
+
+        currentLanguage = btn.dataset.lang;
+        currentPage = 1;
+
+        loadContent();
+
+      });
+
+    });
+
+
+  document
+    .querySelectorAll("#genreChips .chip")
+    .forEach(btn => {
+
+      btn.addEventListener("click", () => {
+
+        document
+          .querySelectorAll("#genreChips .chip")
+          .forEach(x => x.classList.remove("active"));
+
+        btn.classList.add("active");
+
+        currentGenre = btn.dataset.genre;
+        currentPage = 1;
+
+        loadContent();
+
+      });
+
+    });
+
+}
+
+
+/* تحميل المحتوى */
+async function loadContent(){
+
+  showLoading();
+
+  try {
+
+    let data;
+
+    if(currentSearch){
+
+      data = await searchMulti();
+
+    }else{
+
+      data = await discoverContent();
+
+    }
+
+    renderResults(data);
+
+  }catch(error){
+
+    console.error(error);
+
+    hideLoading();
+
+    document.getElementById("empty").style.display = "block";
+
+    document.getElementById("empty").textContent =
+      "حدث خطأ أثناء تحميل البيانات. تأكد من التوكن واتصال الإنترنت.";
+
+  }
+
+}
+
+
+/* البحث */
+async function searchMulti(){
+
+  const url =
+    API_BASE +
+    "/search/multi" +
+    "?query=" + encodeURIComponent(currentSearch) +
+    "&page=" + currentPage +
+    "&include_adult=false" +
+    "&language=ar-SA";
+
+  const response = await fetch(url,{
+    headers
+  });
+
+  if(!response.ok){
+    throw new Error("TMDB search error");
+  }
+
+  const data = await response.json();
+
+  let results = (data.results || [])
+    .filter(x =>
+      x.media_type === "movie" ||
+      x.media_type === "tv"
+    );
+
+  results = applyLocalFilters(results);
+
+  return {
+    results,
+    total_pages: Math.min(data.total_pages || 1, 500)
+  };
+
+}
+
+
+/* اكتشاف الأفلام والمسلسلات */
+async function discoverContent(){
+
+  let endpoint = "/discover/movie";
+
+  /*
+    إذا كانت اللغة كورية نعرض المسلسلات الكورية
+    كاقتراح مناسب لـ K-Drama.
+  */
+
+  if(currentLanguage === "ko"){
+    endpoint = "/discover/tv";
+  }else if(currentLanguage !== "all" && currentLanguage !== "en"){
+    endpoint = "/discover/movie";
+  }else{
+    endpoint = "/trending/all/week";
+  }
+
+
+  let url =
+    API_BASE +
+    endpoint +
+    "?page=" + currentPage +
+    "&include_adult=false" +
+    "&language=ar-SA";
+
+
+  if(
+    currentLanguage !== "all" &&
+    currentLanguage !== "ko"
+  ){
+
+    url +=
+      "&with_original_language=" +
+      encodeURIComponent(currentLanguage);
+
+  }
+
+
+  if(currentLanguage === "ko"){
+    url += "&with_original_language=ko";
+  }
+
+
+  if(
+    currentGenre !== "all" &&
+    currentGenre !== "netflix"
+  ){
+
+    url +=
+      "&with_genres=" +
+      encodeURIComponent(currentGenre);
+
+  }
+
+
+  /*
+    Netflix:
+    watch provider ID = 8
+
+    نستخدم المنطقة العالمية بشكل تقريبي.
+  */
+
+  if(currentGenre === "netflix"){
+
+    url +=
+      "&with_watch_providers=8" +
+      "&watch_region=US";
+
+  }
+
+
+  const response = await fetch(url,{
+    headers
+  });
+
+  if(!response.ok){
+    throw new Error("TMDB discover error");
+  }
+
+  const data = await response.json();
+
+  let results = data.results || [];
+
+  /*
+    trending/all يرجع movie و tv،
+    بينما discover يرجع نوعًا واحدًا.
+  */
+
+  if(endpoint.includes("/trending/")){
+    results = results.filter(x =>
+      x.media_type === "movie" ||
+      x.media_type === "tv"
+    );
+  }
+
+  return {
+    results,
+    total_pages: Math.min(data.total_pages || 1, 500)
+  };
+
+}
+
+
+/* تطبيق الفلاتر محليًا */
+function applyLocalFilters(results){
+
+  let arr = [...results];
+
+
+  if(currentLanguage !== "all"){
+
+    arr = arr.filter(item => {
+
+      const lang =
+        item.original_language || "";
+
+      return lang === currentLanguage;
+
+    });
+
+  }
+
+
+  if(
+    currentGenre !== "all" &&
+    currentGenre !== "netflix"
+  ){
+
+    arr = arr.filter(item => {
+
+      return (item.genre_ids || [])
+        .includes(Number(currentGenre));
+
+    });
+
+  }
+
+
+  return arr;
+
+}
+
+
+/* عرض النتائج */
+function renderResults(data){
+
+  hideLoading();
+
+  const grid = document.getElementById("grid");
+  const empty = document.getElementById("empty");
+
+  grid.innerHTML = "";
+
+  const results = data.results || [];
+
+  totalPages = Math.max(
+    1,
+    Math.min(data.total_pages || 1,500)
+  );
+
+  document.getElementById("pageNumber").textContent =
+    currentPage;
+
+  document.getElementById("prevBtn").disabled =
+    currentPage <= 1;
+
+  document.getElementById("nextBtn").disabled =
+    currentPage >= totalPages;
+
+
+  document.getElementById("resultInfo").textContent =
+    results.length +
+    " نتيجة • الصفحة " +
+    currentPage;
+
+
+  if(!results.length){
+
+    empty.style.display = "block";
+
+    empty.textContent =
+      "لم يتم العثور على نتائج.";
+
+    return;
+
+  }
+
+  empty.style.display = "none";
+
+
+  results.forEach(item => {
+
+    const card = createCard(item);
+
+    grid.appendChild(card);
+
+  });
+
+}
+
+
+/* إنشاء بطاقة */
+function createCard(item){
+
+  const card = document.createElement("article");
+
+  card.className = "card";
+
+  const title =
+    item.title ||
+    item.name ||
+    "بدون عنوان";
+
+  const year =
+    (
+      item.release_date ||
+      item.first_air_date ||
+      ""
+    ).slice(0,4);
+
+  const poster =
+    item.poster_path
+      ? IMAGE_BASE + item.poster_path
+      : "";
+
+
+  const language =
+    languageNames[item.original_language] ||
+    item.original_language ||
+    "غير معروف";
+
+
+  const type =
+    item.media_type === "tv"
+      ? "مسلسل"
+      : "فيلم";
+
+
+  card.innerHTML = `
+
+    <div class="poster">
+
+      ${
+        poster
+
+        ?
+
+        `
+        <img
+          src="${poster}"
+          alt="${escapeHtml(title)}"
+          loading="lazy"
+          onerror="this.parentElement.innerHTML='<div class=&quot;poster-placeholder&quot;>لا توجد صورة</div>'">
+        `
+
+        :
+
+        `
+        <div class="poster-placeholder">
+          لا توجد صورة
+        </div>
+        `
+      }
+
+    </div>
+
+    <div class="card-info">
+
+      <div class="card-title">
+        ${escapeHtml(title)}
+      </div>
+
+      <div class="card-meta">
+        ${type}
+        ${year ? " • " + year : ""}
+        <br>
+        ${escapeHtml(language)}
+      </div>
+
+      <div class="rating">
+        ⭐ ${
+          Number(item.vote_average || 0).toFixed(1)
+        }
+      </div>
+
+    </div>
+
+  `;
+
+
+  card.addEventListener("click", () => {
+
+    openDetails(
+      item.id,
+      item.media_type ||
+      (
+        item.name
+          ? "tv"
+          : "movie"
+      )
+    );
+
+  });
+
+
+  return card;
+
+}
+
+
+/* تفاصيل */
+async function openDetails(id,type){
+
+  const modal =
+    document.getElementById("detailsModal");
+
+  const loading =
+    document.getElementById("detailsLoading");
+
+  const content =
+    document.getElementById("detailsContent");
+
+  modal.classList.add("show");
+
+  loading.style.display = "block";
+  content.style.display = "none";
+
+
+  try{
+
+    const url =
+      API_BASE +
+      "/" +
+      type +
+      "/" +
+      id +
+      "?append_to_response=credits";
+
+    const response =
+      await fetch(url,{
+        headers
+      });
+
+
+    if(!response.ok){
+      throw new Error("Details error");
+    }
+
+
+    let data = await response.json();
+
+
+    /*
+      إذا لم توجد القصة العربية،
+      نحاول جلب النسخة الإنجليزية.
+    */
+
+    if(!data.overview){
+
+      const fallbackResponse =
+        await fetch(
+          API_BASE +
+          "/" +
+          type +
+          "/" +
+          id +
+          "?language=en-US&append_to_response=credits",
+          {headers}
+        );
+
+      if(fallbackResponse.ok){
+
+        const fallback =
+          await fallbackResponse.json();
+
+        if(fallback.overview){
+          data.overview =
+            fallback.overview;
+        }
+
+      }
+
+    }
+
+
+    fillDetails(data,type);
+
+    loading.style.display = "none";
+    content.style.display = "grid";
+
+
+  }catch(error){
+
+    console.error(error);
+
+    loading.innerHTML =
+      "تعذر تحميل تفاصيل هذا العمل.";
+
+  }
+
+}
+
+
+/* تعبئة التفاصيل */
+function fillDetails(data,type){
+
+  const title =
+    data.title ||
+    data.name ||
+    "بدون عنوان";
+
+
+  const originalTitle =
+    data.original_title ||
+    data.original_name ||
+    "";
+
+
+  const poster =
+    data.poster_path
+      ? IMAGE_BASE + data.poster_path
+      : "";
+
+
+  document.getElementById("detailPoster").src =
+    poster;
+
+
+  document.getElementById("detailPoster").alt =
+    title;
+
+
+  document.getElementById("detailTitle").textContent =
+    title;
+
+
+  document.getElementById("detailOriginalTitle").textContent =
+    originalTitle &&
+    originalTitle !== title
+      ? originalTitle
+      : "";
+
+
+  document.getElementById("detailType").textContent =
+    type === "tv"
+      ? "مسلسل"
+      : "فيلم";
+
+
+  const date =
+    data.release_date ||
+    data.first_air_date ||
+    "";
+
+
+  document.getElementById("detailYear").textContent =
+    date
+      ? date.slice(0,4)
+      : "غير معروف";
+
+
+  document.getElementById("detailRating").textContent =
+    Number(data.vote_average || 0).toFixed(1);
+
+
+  document.getElementById("detailLanguage").textContent =
+    languageNames[data.original_language] ||
+    data.original_language ||
+    "غير معروف";
+
+
+  /* المدة */
+  const runtimeBadge =
+    document.getElementById("runtimeBadge");
+
+  if(type === "movie"){
+
+    runtimeBadge.style.display = "block";
+
+    const runtime =
+      data.runtime || 0;
+
+    document.getElementById("detailRuntime").textContent =
+      runtime
+        ? runtime + " دقيقة"
+        : "غير معروف";
+
+  }else{
+
+    runtimeBadge.style.display = "none";
+
+  }
+
+
+  /* التصنيفات */
+  const genres =
+    document.getElementById("detailGenres");
+
+  genres.innerHTML = "";
+
+  (data.genres || []).forEach(g => {
+
+    const span =
+      document.createElement("span");
+
+    span.className = "person";
+
+    span.textContent = g.name;
+
+    genres.appendChild(span);
+
+  });
+
+
+  /* القصة */
+  document.getElementById("detailOverview").textContent =
+    data.overview ||
+    "لا توجد قصة متوفرة لهذا العمل.";
+
+
+  /* الإخراج */
+  const directorBox =
+    document.getElementById("detailDirector");
+
+  directorBox.innerHTML = "";
+
+
+  let directors = [];
+
+
+  if(data.credits){
+
+    directors =
+      (data.credits.crew || [])
+      .filter(person =>
+        person.job === "Director"
+      );
+
+  }
+
+
+  if(type === "tv" && data.created_by){
+
+    directors =
+      data.created_by.map(person => ({
+        name:person.name
+      }));
+
+  }
+
+
+  if(!directors.length){
+
+    directorBox.innerHTML =
+      '<span class="person">غير متوفر</span>';
+
+  }else{
+
+    directors.slice(0,8).forEach(person => {
+
+      const el =
+        document.createElement("span");
+
+      el.className = "person";
+
+      el.textContent =
+        person.name;
+
+      directorBox.appendChild(el);
+
+    });
+
+  }
+
+
+  /* الممثلون */
+  const castBox =
+    document.getElementById("detailCast");
+
+  castBox.innerHTML = "";
+
+
+  const cast =
+    data.credits &&
+    data.credits.cast
+      ? data.credits.cast.slice(0,15)
+      : [];
+
+
+  if(!cast.length){
+
+    castBox.innerHTML =
+      '<span class="person">غير متوفر</span>';
+
+  }else{
+
+    cast.forEach(person => {
+
+      const el =
+        document.createElement("span");
+
+      el.className = "person";
+
+      el.textContent =
+        person.name +
+        (
+          person.character
+            ? " — " + person.character
+            : ""
+        );
+
+      castBox.appendChild(el);
+
+    });
+
+  }
+
+
+  /* المسلسلات */
+  const tvSection =
+    document.getElementById("tvSection");
+
+
+  if(type === "tv"){
+
+    tvSection.style.display = "block";
+
+
+    document.getElementById(
+      "detailSeasonsCount"
+    ).textContent =
+      data.number_of_seasons || 0;
+
+
+    document.getElementById(
+      "detailEpisodesCount"
+    ).textContent =
+      data.number_of_episodes || 0;
+
+
+    const seasonsList =
+      document.getElementById("seasonsList");
+
+    seasonsList.innerHTML = "";
+
+
+    (data.seasons || [])
+      .filter(s => s.season_number >= 0)
+      .forEach(season => {
+
+        const el =
+          document.createElement("div");
+
+        el.className = "season";
+
+        el.innerHTML = `
+          <b>${escapeHtml(
+            season.name ||
+            "الموسم " + season.season_number
+          )}</b>
+
+          <small>
+            ${season.episode_count || 0}
+            حلقة
+          </small>
+        `;
+
+        seasonsList.appendChild(el);
+
+      });
+
+  }else{
+
+    tvSection.style.display = "none";
+
+  }
+
+}
+
+
+/* تغيير الصفحة */
+function changePage(direction){
+
+  const newPage =
+    currentPage + direction;
+
+  if(newPage < 1){
+    return;
+  }
+
+  if(newPage > totalPages){
+    return;
+  }
+
+  currentPage = newPage;
+
+  loadContent();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* إغلاق التفاصيل */
+function closeDetails(){
+
+  document
+    .getElementById("detailsModal")
+    .classList.remove("show");
+
+}
+
+
+function closeModalOutside(event){
+
+  if(event.target.id === "detailsModal"){
+    closeDetails();
+  }
+
+}
+
+
+/* تسجيل الدخول */
+function openLogin(){
+
+  document
+    .getElementById("loginModal")
+    .classList.add("show");
+
+}
+
+
+function closeLogin(){
+
+  document
+    .getElementById("loginModal")
+    .classList.remove("show");
+
+}
+
+
+function closeLoginOutside(event){
+
+  if(event.target.id === "loginModal"){
+    closeLogin();
+  }
+
+}
+
+
+function fakeLogin(){
+
+  alert(
+    "واجهة تسجيل الدخول جاهزة، لكن نظام الحسابات الحقيقي غير مربوط حاليًا."
+  );
+
+}
+
+
+/* Loading */
+function showLoading(){
+
+  document.getElementById("loading").style.display =
+    "block";
+
+  document.getElementById("grid").innerHTML =
+    "";
+
+  document.getElementById("empty").style.display =
+    "none";
+
+}
+
+
+function hideLoading(){
+
+  document.getElementById("loading").style.display =
+    "none";
+
+}
+
+
+/* حماية النص */
+function escapeHtml(text){
+
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* ESC لإغلاق النوافذ */
+document.addEventListener("keydown",event => {
+
+  if(event.key === "Escape"){
+
+    closeDetails();
+    closeLogin();
+
+  }
+
+});
+</script>
+
+</body>
+</html>
