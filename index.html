@@ -1,248 +1,489 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
+
 <head>
+
 <meta charset="utf-8">
+
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<meta name="google-site-verification" content="5tPm2NZyx15iK8Z6AVYK1tP_S9dDVo0sGQ4j7ja2TRU">
+<meta name="google-site-verification"
+content="5tPm2NZyx15iK8Z6AVYK1tP_S9dDVo0sGQ4j7ja2TRU">
 
 <title>أدواتي | أدوات عربية مجانية</title>
 
+<meta name="description"
+content="أدوات عربية مجانية للكتابة والدراسة والحسابات والبرمجة، مع قسم الأفلام والمسلسلات.">
+
 <style>
+
+/* =========================
+   الأساس
+========================= */
+
 :root{
-  --b:#5b36d9;
-  --i:#172033;
-  --m:#697386;
-  --l:#e6e9f0
+  --gold:#d4af37;
+  --gold-light:#f1d477;
+  --black:#080808;
+  --black2:#111111;
+  --black3:#181818;
+  --white:#ffffff;
+  --text:#f5f5f5;
+  --muted:#a9a9a9;
+  --border:#2b2b2b;
 }
 
 *{
-  box-sizing:border-box
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
   margin:0;
   font-family:Tahoma,Arial,sans-serif;
-  background:#f6f7fb;
-  color:var(--i);
-  line-height:1.7
-}
-
-.c{
-  width:min(1120px,calc(100% - 32px));
-  margin:auto
+  background:var(--black);
+  color:var(--text);
+  line-height:1.7;
 }
 
 a{
   text-decoration:none;
-  color:inherit
+  color:inherit;
 }
 
-header{
-  height:70px;
-  background:#fffffff0;
-  border-bottom:1px solid var(--l);
-  position:sticky;
+button,
+input,
+select,
+textarea{
+  font-family:inherit;
+}
+
+/* =========================
+   القائمة الجانبية
+========================= */
+
+.sidebar{
+  position:fixed;
+  right:0;
   top:0;
-  z-index:5
-}
-
-.nav{
-  height:100%;
+  width:245px;
+  height:100vh;
+  background:#050505;
+  border-left:1px solid var(--border);
+  padding:28px 18px;
+  z-index:100;
   display:flex;
-  align-items:center;
-  justify-content:space-between
+  flex-direction:column;
 }
 
 .logo{
-  font-size:1.4rem;
+  text-align:center;
+  font-size:30px;
   font-weight:900;
-  color:var(--b)
+  color:var(--gold);
+  margin-bottom:25px;
 }
 
 .logo span{
-  color:var(--i)
+  color:#fff;
 }
 
-nav{
+.login-btn{
+  width:100%;
+  padding:13px;
+  border:1px solid var(--gold);
+  border-radius:10px;
+  background:transparent;
+  color:var(--gold);
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+  margin-bottom:25px;
+}
+
+.login-btn:hover{
+  background:var(--gold);
+  color:#000;
+}
+
+.side-nav{
   display:flex;
-  gap:22px;
-  color:#46516a
+  flex-direction:column;
+  gap:7px;
 }
 
-.hero{
+.side-nav a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:13px 14px;
+  border-radius:10px;
+  color:#bdbdbd;
+  transition:.2s;
+}
+
+.side-nav a:hover,
+.side-nav a.active{
+  background:#171717;
+  color:var(--gold);
+}
+
+.side-nav span{
+  width:24px;
   text-align:center;
-  padding:74px 0 58px;
-  background:
-    radial-gradient(circle at 85% 25%,#e5deff 0,transparent 28%),
-    linear-gradient(135deg,#faf8ff,#eef5ff)
+  font-size:18px;
 }
 
-.ey{
-  display:inline-block;
-  background:#eeeaff;
-  color:#4d29c8;
-  padding:5px 14px;
-  border-radius:99px;
-  font-size:.85rem;
-  font-weight:bold
+/* =========================
+   المحتوى
+========================= */
+
+.site-main{
+  margin-right:245px;
+  min-height:100vh;
 }
 
-h1{
-  font-size:clamp(2rem,5vw,3.6rem);
-  line-height:1.25;
-  margin:15px 0
+/* =========================
+   الشريط العلوي
+========================= */
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(8,8,8,.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:18px 25px;
 }
 
-.hero p,
-.head p{
-  color:var(--m);
-  margin:0 auto 26px
-}
-
-.search{
-  max-width:650px;
+.top-search{
+  max-width:700px;
   margin:auto;
-  position:relative
+  position:relative;
 }
 
-.search i{
+.top-search input{
+  width:100%;
+  padding:15px 52px 15px 18px;
+  background:#151515;
+  color:#fff;
+  border:1px solid #303030;
+  border-radius:12px;
+  outline:none;
+  font-size:15px;
+}
+
+.top-search input:focus{
+  border-color:var(--gold);
+}
+
+.search-icon{
   position:absolute;
   right:18px;
-  top:14px;
-  color:var(--b);
-  font-size:1.3rem
+  top:10px;
+  font-size:22px;
+  color:var(--gold);
 }
 
-.search input{
-  width:100%;
-  padding:17px 52px 17px 16px;
-  border:1px solid #dce0eb;
-  border-radius:16px;
-  font:inherit;
-  outline:0;
-  box-shadow:0 12px 34px #23195515
-}
+/* =========================
+   Hero
+========================= */
 
-.search input:focus{
-  border-color:var(--b)
-}
-
-main{
-  padding:45px 0 70px
-}
-
-.head{
+.hero{
+  min-height:430px;
   display:flex;
-  justify-content:space-between;
-  align-items:end;
-  margin-bottom:18px
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:80px 25px;
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(212,175,55,.16),
+      transparent 40%
+    ),
+    linear-gradient(
+      180deg,
+      #111,
+      #080808
+    );
 }
 
-.head h2{
-  margin:0
+.hero-content{
+  max-width:850px;
 }
 
-.cats{
+.hero-badge{
+  display:inline-block;
+  padding:6px 16px;
+  border:1px solid rgba(212,175,55,.5);
+  border-radius:30px;
+  color:var(--gold);
+  font-size:14px;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  margin:0 0 15px;
+  font-size:clamp(2rem,5vw,4rem);
+  line-height:1.25;
+  color:#fff;
+}
+
+.hero h1 strong{
+  color:var(--gold);
+}
+
+.hero p{
+  max-width:700px;
+  margin:0 auto 28px;
+  color:#aaa;
+  font-size:17px;
+}
+
+.hero-btns{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.gold-btn{
+  display:inline-block;
+  padding:13px 25px;
+  border-radius:10px;
+  background:var(--gold);
+  color:#000;
+  font-weight:bold;
+  transition:.2s;
+}
+
+.gold-btn:hover{
+  background:var(--gold-light);
+  transform:translateY(-2px);
+}
+
+.dark-btn{
+  display:inline-block;
+  padding:13px 25px;
+  border-radius:10px;
+  border:1px solid #444;
+  color:#fff;
+  background:#151515;
+  font-weight:bold;
+  transition:.2s;
+}
+
+.dark-btn:hover{
+  border-color:var(--gold);
+  color:var(--gold);
+}
+
+/* =========================
+   الأقسام
+========================= */
+
+.section{
+  width:min(1150px,calc(100% - 40px));
+  margin:0 auto;
+  padding:70px 0;
+}
+
+.section-head{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.section-head h2{
+  margin:0 0 8px;
+  color:#fff;
+  font-size:30px;
+}
+
+.section-head h2 span{
+  color:var(--gold);
+}
+
+.section-head p{
+  margin:0;
+  color:var(--muted);
+}
+
+/* =========================
+   بطاقة ACinema
+========================= */
+
+.cinema-section{
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(212,175,55,.08),
+      transparent 55%
+    );
+}
+
+.cinema-box{
+  background:#111;
+  border:1px solid #2c2c2c;
+  border-radius:22px;
+  padding:50px 25px;
+  text-align:center;
+  box-shadow:0 15px 50px rgba(0,0,0,.35);
+}
+
+.cinema-icon{
+  font-size:60px;
+  margin-bottom:10px;
+}
+
+.cinema-box h2{
+  margin:0 0 10px;
+  font-size:32px;
+  color:var(--gold);
+}
+
+.cinema-box p{
+  color:#aaa;
+  max-width:650px;
+  margin:0 auto 25px;
+}
+
+.cinema-btn{
+  display:inline-block;
+  padding:14px 30px;
+  background:var(--gold);
+  color:#000;
+  border-radius:10px;
+  font-weight:bold;
+  transition:.2s;
+}
+
+.cinema-btn:hover{
+  background:var(--gold-light);
+  transform:translateY(-2px);
+}
+
+/* =========================
+   الأدوات
+========================= */
+
+.tools-section{
+  background:#090909;
+}
+
+.categories{
   display:flex;
   flex-wrap:wrap;
-  gap:10px;
-  margin-bottom:30px
+  justify-content:center;
+  gap:9px;
+  margin-bottom:30px;
 }
 
 .cat{
-  border:1px solid var(--l);
-  border-radius:99px;
-  padding:8px 16px;
-  background:#fff;
-  font:inherit;
-  cursor:pointer
+  border:1px solid #333;
+  border-radius:30px;
+  padding:9px 18px;
+  background:#111;
+  color:#bbb;
+  cursor:pointer;
+  transition:.2s;
 }
 
-.cat.active,
-.cat:hover{
-  background:var(--b);
-  color:#fff;
-  border-color:var(--b)
+.cat:hover,
+.cat.active{
+  background:var(--gold);
+  color:#000;
+  border-color:var(--gold);
 }
 
-.grid{
+.tools-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
 }
 
 .card{
-  min-height:210px;
-  display:flex;
-  flex-direction:column;
-  background:#fff;
-  border:1px solid var(--l);
-  border-radius:20px;
-  padding:21px;
+  min-height:190px;
+  padding:20px;
+  background:#111;
+  border:1px solid #292929;
+  border-radius:17px;
   cursor:pointer;
-  transition:.2s
+  transition:.25s;
 }
 
-.card:hover,
-.card.active{
-  transform:translateY(-4px);
-  border-color:#cbbdff;
-  box-shadow:0 14px 30px #2c1c7018
+.card:hover{
+  transform:translateY(-5px);
+  border-color:var(--gold);
+  box-shadow:0 15px 35px rgba(212,175,55,.08);
 }
 
 .icon{
-  width:47px;
-  height:47px;
+  width:48px;
+  height:48px;
   display:grid;
   place-items:center;
-  background:#f0ecff;
-  border-radius:14px;
-  font-size:1.4rem
+  border-radius:13px;
+  background:#1b1b1b;
+  border:1px solid #303030;
+  font-size:23px;
 }
 
 .card h3{
-  margin:14px 0 5px;
-  font-size:1.1rem
+  margin:14px 0 6px;
+  color:#fff;
+  font-size:17px;
 }
 
 .card p{
   margin:0;
-  color:var(--m);
-  font-size:.9rem
+  color:#999;
+  font-size:13px;
 }
 
 .tag{
-  margin-top:auto;
-  align-self:start;
-  background:#f0ecff;
-  color:#5428cf;
+  display:inline-block;
+  margin-top:15px;
   padding:3px 9px;
-  border-radius:99px;
-  font-size:.75rem
+  border-radius:20px;
+  background:#1b1b1b;
+  color:var(--gold);
+  font-size:11px;
 }
 
+/* =========================
+   لوحة الأداة
+========================= */
+
 .panel{
-  margin-top:42px;
-  background:#fff;
-  border:1px solid var(--l);
-  border-radius:22px;
-  padding:27px
+  margin-top:35px;
+  background:#111;
+  border:1px solid #2b2b2b;
+  border-radius:20px;
+  padding:28px;
 }
 
 .panel h2{
-  margin-top:0
+  margin-top:0;
+  color:var(--gold);
 }
 
 .form{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:14px
+  gap:14px;
 }
 
 label{
+  display:block;
+  font-size:14px;
   font-weight:bold;
-  font-size:14px
+  color:#ddd;
 }
 
 input,
@@ -251,276 +492,371 @@ textarea{
   width:100%;
   margin-top:7px;
   padding:12px;
-  border:1px solid #d8dce5;
-  border-radius:10px;
-  font:inherit
+  background:#0a0a0a;
+  color:#fff;
+  border:1px solid #333;
+  border-radius:9px;
+  outline:none;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:var(--gold);
 }
 
 textarea{
-  min-height:150px
+  min-height:150px;
+  resize:vertical;
 }
 
 .btn{
   margin-top:18px;
-  padding:12px 18px;
+  padding:12px 20px;
   border:0;
-  border-radius:10px;
-  background:var(--b);
-  color:#fff;
-  font:inherit;
+  border-radius:9px;
+  background:var(--gold);
+  color:#000;
   font-weight:bold;
-  cursor:pointer
+  cursor:pointer;
+}
+
+.btn:hover{
+  background:var(--gold-light);
 }
 
 .result{
   margin-top:18px;
   padding:16px;
-  border-radius:12px;
-  background:#f0f3ff;
-  min-height:52px
+  border-radius:10px;
+  background:#0a0a0a;
+  border:1px solid #292929;
+  color:#ddd;
+  min-height:52px;
 }
 
 .hidden{
-  display:none
+  display:none;
 }
+
+/* =========================
+   عن الموقع
+========================= */
 
 .about{
-  margin-top:45px;
-  padding:32px;
-  border-radius:24px;
-  background:linear-gradient(135deg,#29204e,#5634b5);
-  color:#fff
+  background:#0b0b0b;
+  border-top:1px solid #202020;
+  border-bottom:1px solid #202020;
 }
 
-.about h2,
-.about p{
-  margin:0
+.about-box{
+  width:min(900px,calc(100% - 40px));
+  margin:auto;
+  text-align:center;
 }
 
-.about p{
-  color:#e5def9
+.about-box h2{
+  color:var(--gold);
+  margin-top:0;
 }
+
+.about-box p{
+  color:#aaa;
+}
+
+/* =========================
+   Footer
+========================= */
 
 footer{
   text-align:center;
-  padding:27px;
-  background:#fff;
-  border-top:1px solid var(--l);
-  color:var(--m)
+  padding:35px 20px;
+  background:#050505;
+  border-top:1px solid #222;
+  color:#777;
 }
 
-.flag{
-  font-size:1.4rem
+footer strong{
+  color:var(--gold);
 }
 
+/* =========================
+   Login Modal
+========================= */
 
-/* ============================= */
-/* قسم الأفلام */
-/* ============================= */
-
-.movies-section{
-  margin:45px auto;
-  padding:30px;
-  background:#fff;
-  border:1px solid var(--l);
-  border-radius:22px
+.login-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.78);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:500;
+  padding:20px;
 }
 
-.movies-head{
-  text-align:center;
-  margin-bottom:25px
-}
-
-.movies-head h2{
-  margin:0 0 8px
-}
-
-.movies-head p{
-  color:var(--m);
-  margin:0
-}
-
-.movie-search{
-  max-width:650px;
-  margin:20px auto 30px;
+.login-modal.show{
   display:flex;
-  gap:10px
 }
 
-.movie-search input{
-  margin:0;
-  flex:1
+.login-box{
+  width:min(420px,100%);
+  background:#111;
+  border:1px solid #333;
+  border-radius:18px;
+  padding:28px;
+  position:relative;
 }
 
-.movie-search button{
+.login-box h2{
+  color:var(--gold);
+  margin-top:0;
+}
+
+.login-box label{
+  margin-top:14px;
+}
+
+.close-login{
+  position:absolute;
+  left:15px;
+  top:10px;
+  background:none;
   border:0;
-  border-radius:10px;
-  padding:0 20px;
-  background:var(--b);
+  color:#aaa;
+  font-size:25px;
+  cursor:pointer;
+}
+
+.close-login:hover{
   color:#fff;
-  font:inherit;
-  font-weight:bold;
-  cursor:pointer
 }
 
-.movie-search button:hover{
-  opacity:.9
-}
-
-.movie-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:18px
-}
-
-.movie-card{
-  background:#fff;
-  border:1px solid var(--l);
-  border-radius:16px;
-  overflow:hidden;
-  transition:.2s
-}
-
-.movie-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 12px 25px #00000015
-}
-
-.movie-card img{
+.login-submit{
   width:100%;
-  aspect-ratio:2/3;
-  object-fit:cover;
-  display:block;
-  background:#eee
+  margin-top:20px;
 }
 
-.movie-info{
-  padding:12px
-}
+/* =========================
+   Responsive
+========================= */
 
-.movie-info h3{
-  margin:0 0 5px;
-  font-size:1rem;
-  line-height:1.5
-}
+@media(max-width:1100px){
 
-.movie-info p{
-  margin:0;
-  color:var(--m);
-  font-size:.8rem
-}
-
-.movie-loading,
-.movie-message{
-  text-align:center;
-  color:var(--m);
-  padding:25px;
-  grid-column:1/-1
-}
-
-@media(max-width:900px){
-
-  .movie-grid{
-    grid-template-columns:repeat(4,1fr)
+  .tools-grid{
+    grid-template-columns:repeat(3,1fr);
   }
 
 }
 
-@media(max-width:760px){
+@media(max-width:850px){
 
-  .grid{
-    grid-template-columns:repeat(2,1fr)
+  .sidebar{
+    width:200px;
+  }
+
+  .site-main{
+    margin-right:200px;
+  }
+
+  .tools-grid{
+    grid-template-columns:repeat(2,1fr);
   }
 
 }
 
-@media(max-width:700px){
+@media(max-width:650px){
 
-  .movie-grid{
-    grid-template-columns:repeat(3,1fr)
+  .sidebar{
+    position:relative;
+    width:100%;
+    height:auto;
+    border-left:0;
+    border-bottom:1px solid var(--border);
+    padding:15px;
+  }
+
+  .logo{
+    margin-bottom:12px;
+  }
+
+  .login-btn{
+    margin-bottom:12px;
+  }
+
+  .side-nav{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .side-nav a{
+    font-size:13px;
+    padding:10px;
+  }
+
+  .site-main{
+    margin-right:0;
+  }
+
+  .topbar{
+    position:relative;
+  }
+
+  .hero{
+    min-height:380px;
+    padding:60px 20px;
+  }
+
+  .section{
+    width:min(100% - 25px,1150px);
+    padding:50px 0;
+  }
+
+  .tools-grid{
+    grid-template-columns:1fr;
   }
 
 }
 
-@media(max-width:560px){
+@media(max-width:430px){
 
-  nav{
-    display:none
+  .side-nav{
+    grid-template-columns:1fr;
   }
 
-  .grid{
-    grid-template-columns:1fr
+  .hero h1{
+    font-size:2rem;
   }
 
-  .head{
-    align-items:start;
-    flex-direction:column
+  .hero p{
+    font-size:14px;
   }
 
-}
-
-@media(max-width:500px){
-
-  .movie-grid{
-    grid-template-columns:repeat(2,1fr)
-  }
-
-  .movie-search{
-    flex-direction:column
-  }
-
-  .movie-search button{
-    padding:12px
+  .cinema-box{
+    padding:35px 18px;
   }
 
 }
+
+
+/* =========================
+   أدوات الأفلام القديمة
+   مخفية من الصفحة الرئيسية
+========================= */
+
+.movies-old{
+  display:none;
+}
+
 </style>
+
 </head>
+
 
 <body>
 
-<header>
-  <div class="c nav">
 
-    <a href="#" class="logo">
-      أدوا<span>تي</span>
+<!-- =========================
+     القائمة الجانبية
+========================= -->
+
+<aside class="sidebar">
+
+  <div class="logo">
+    أدوا<span>تي</span>
+  </div>
+
+  <button class="login-btn" onclick="openLogin()">
+    🔐 تسجيل الدخول
+  </button>
+
+  <nav class="side-nav">
+
+    <a href="#home" class="active">
+      <span>🏠</span>
+      الرئيسية
     </a>
 
-    <nav>
-      <a href="#home">الرئيسية</a>
-      <a href="#movies">الأفلام</a>
-      <a href="#tools">الأدوات</a>
-      <a href="#about">عن الموقع</a>
-    </nav>
+    <a href="acinema.html">
+      <span>🎬</span>
+      الأفلام والمسلسلات
+    </a>
+
+    <a href="#tools">
+      <span>🛠️</span>
+      الأدوات
+    </a>
+
+    <a href="#ai">
+      <span>✨</span>
+      الذكاء الاصطناعي
+    </a>
+
+    <a href="#about">
+      <span>ℹ️</span>
+      عن الموقع
+    </a>
+
+  </nav>
+
+</aside>
+
+
+<div class="site-main">
+
+
+<!-- =========================
+     البحث العلوي
+========================= -->
+
+<header class="topbar">
+
+  <div class="top-search">
+
+    <span class="search-icon">⌕</span>
+
+    <input
+      id="search"
+      type="search"
+      placeholder="ابحث عن أداة..."
+    >
 
   </div>
+
 </header>
 
 
+<!-- =========================
+     Hero
+========================= -->
+
 <section class="hero" id="home">
 
-  <div class="c">
+  <div class="hero-content">
 
-    <span class="ey">
+    <span class="hero-badge">
       أدوات عربية مجانية
     </span>
 
     <h1>
-      أنجز مهامك بشكل أسرع وأسهل
+      أنجز مهامك بشكل
+      <strong>أسرع وأسهل</strong>
     </h1>
 
     <p>
-      أدوات للكتابة، الدراسة، البرمجة والحسابات — بدون تسجيل.
+      أدوات مجانية للكتابة والدراسة والحسابات والبرمجة،
+      في مكان واحد وبواجهة عربية بسيطة.
     </p>
 
-    <div class="search">
+    <div class="hero-btns">
 
-      <i>⌕</i>
+      <a href="#tools" class="gold-btn">
+        استكشف الأدوات
+      </a>
 
-      <input
-        id="search"
-        placeholder="ابحث عن أداة…"
-      >
+      <a href="acinema.html" class="dark-btn">
+        🎬 الأفلام والمسلسلات
+      </a>
 
     </div>
 
@@ -529,79 +865,72 @@ footer{
 </section>
 
 
+<!-- =========================
+     ACinema
+========================= -->
 
-<!-- ============================= -->
-<!-- قسم الأفلام -->
-<!-- ============================= -->
+<section class="section cinema-section" id="cinema">
 
-<section class="movies-section c" id="movies">
-
-  <div class="movies-head">
+  <div class="section-head">
 
     <h2>
-      🎬 قسم الأفلام
+      <span>ACinema</span>
     </h2>
 
     <p>
-      ابحث عن أفلامك المفضلة
+      الأفلام والمسلسلات
     </p>
 
   </div>
 
 
-  <div class="movie-search">
+  <div class="cinema-box">
 
-    <input
-      id="movieSearch"
-      type="text"
-      placeholder="اكتب اسم الفيلم..."
-    >
-
-    <button onclick="searchMovies()">
-      بحث
-    </button>
-
-  </div>
-
-
-  <div id="movieGrid" class="movie-grid">
-
-    <div class="movie-message">
-      اكتب اسم فيلم للبحث 🎬
+    <div class="cinema-icon">
+      🎬
     </div>
+
+    <h2>
+      الأفلام والمسلسلات
+    </h2>
+
+    <p>
+      انتقل إلى قسم ACinema لاكتشاف الأفلام والمسلسلات
+      والبحث عن أعمالك المفضلة.
+    </p>
+
+    <a
+      href="acinema.html"
+      class="cinema-btn"
+    >
+      دخول إلى ACinema
+    </a>
 
   </div>
 
 </section>
 
 
+<!-- =========================
+     الأدوات
+========================= -->
 
-<main class="c">
+<section class="section tools-section" id="tools">
 
-<section id="tools">
+  <div class="section-head">
 
-  <div class="head">
+    <h2>
+      استكشف <span>الأدوات</span>
+    </h2>
 
-    <div>
-
-      <h2>
-        استكشف الأدوات
-      </h2>
-
-      <p>
-        اختر تصنيفاً أو ابحث باسم الأداة.
-      </p>
-
-    </div>
-
-    <p id="count">
-      20 أداة
+    <p>
+      اختر تصنيفاً أو ابحث باسم الأداة.
     </p>
 
   </div>
 
 
-  <div class="cats">
+  <div class="categories">
 
     <button class="cat active" data-c="all">
       الكل
@@ -626,401 +955,338 @@ footer{
   </div>
 
 
-  <div id="grid" class="grid"></div>
-
-</section>
+  <div id="grid" class="tools-grid"></div>
 
 
+  <!-- لوحة الأدوات -->
 
-<section class="panel" id="panel">
-
-
-  <div class="tool" id="age">
-
-    <h2>
-      🧮 حاسبة العمر
-    </h2>
-
-    <div class="form">
-
-      <label>
-        تاريخ الميلاد
-        <input id="birth" type="date">
-      </label>
-
-      <label>
-        احسب حتى
-        <input id="ageAt" type="date">
-      </label>
-
-    </div>
-
-    <button class="btn" onclick="calcAge()">
-      احسب العمر
-    </button>
-
-    <div id="ageResult" class="result">
-      أدخل تاريخ الميلاد ثم اضغط «احسب العمر».
-    </div>
-
-  </div>
+  <section class="panel" id="panel">
 
 
+    <!-- العمر -->
 
-  <div class="tool hidden" id="date">
+    <div class="tool" id="age">
 
-    <h2>
-      📅 الفرق بين تاريخين
-    </h2>
+      <h2>
+        🧮 حاسبة العمر
+      </h2>
 
-    <div class="form">
+      <div class="form">
 
-      <label>
-        التاريخ الأول
-        <input id="date1" type="date">
-      </label>
+        <label>
+          تاريخ الميلاد
+          <input id="birth" type="date">
+        </label>
 
-      <label>
-        التاريخ الثاني
-        <input id="date2" type="date">
-      </label>
+        <label>
+          احسب حتى
+          <input id="ageAt" type="date">
+        </label>
+
+      </div>
+
+      <button class="btn" onclick="calcAge()">
+        احسب العمر
+      </button>
+
+      <div id="ageResult" class="result">
+        أدخل تاريخ الميلاد ثم اضغط «احسب العمر».
+      </div>
 
     </div>
 
-    <button class="btn" onclick="calcDate()">
-      احسب الفرق
-    </button>
 
-    <div id="dateResult" class="result"></div>
+    <!-- الفرق بين تاريخين -->
 
-  </div>
+    <div class="tool hidden" id="date">
+
+      <h2>
+        📅 الفرق بين تاريخين
+      </h2>
+
+      <div class="form">
+
+        <label>
+          التاريخ الأول
+          <input id="date1" type="date">
+        </label>
+
+        <label>
+          التاريخ الثاني
+          <input id="date2" type="date">
+        </label>
+
+      </div>
+
+      <button class="btn" onclick="calcDate()">
+        احسب الفرق
+      </button>
+
+      <div id="dateResult" class="result"></div>
+
+    </div>
 
 
+    <!-- العملات -->
 
-  <div class="tool hidden" id="currency">
+    <div class="tool hidden" id="currency">
 
-    <h2>
-      💱 محول العملات
-    </h2>
+      <h2>
+        💱 محول العملات
+      </h2>
 
-    <div class="form">
+      <div class="form">
+
+        <label>
+          المبلغ
+          <input
+            id="amount"
+            type="number"
+            value="1"
+          >
+        </label>
+
+        <label>
+          إلى
+          <select id="to">
+            <option>IQD</option>
+            <option>USD</option>
+            <option>EUR</option>
+            <option>TRY</option>
+          </select>
+        </label>
+
+        <label>
+          سعر التحويل
+          <input
+            id="rate"
+            type="number"
+            placeholder="مثال: 1310"
+          >
+        </label>
+
+      </div>
+
+      <button class="btn" onclick="convert()">
+        حوّل
+      </button>
+
+      <div id="currencyResult" class="result"></div>
+
+    </div>
+
+
+    <!-- الأرقام إلى كلمات -->
+
+    <div class="tool hidden" id="words">
+
+      <h2>
+        🔢 الأرقام إلى كلمات
+      </h2>
 
       <label>
-        المبلغ
-        <input id="amount" type="number" value="1">
-      </label>
+        أدخل رقماً
 
-      <label>
-        إلى
-        <select id="to">
-          <option>IQD</option>
-          <option>USD</option>
-          <option>EUR</option>
-          <option>TRY</option>
-        </select>
-      </label>
-
-      <label>
-        سعر التحويل
         <input
-          id="rate"
+          id="numberInput"
           type="number"
-          placeholder="مثال: 1310"
+          min="0"
+          max="999999999"
         >
+
       </label>
 
+      <button class="btn" onclick="words()">
+        حوّل إلى كلمات
+      </button>
+
+      <div id="wordsResult" class="result"></div>
+
     </div>
 
-    <button class="btn" onclick="convert()">
-      حوّل
-    </button>
 
-    <div id="currencyResult" class="result"></div>
+    <!-- عداد -->
 
-  </div>
+    <div class="tool hidden" id="counter">
+
+      <h2>
+        📝 عداد الكلمات والحروف
+      </h2>
+
+      <textarea
+        id="textInput"
+        placeholder="اكتب أو الصق النص هنا..."
+      ></textarea>
+
+      <div id="counterResult" class="result">
+        ابدأ بالكتابة لرؤية الإحصائيات.
+      </div>
+
+    </div>
 
 
+    <!-- الذكاء الاصطناعي -->
 
-  <div class="tool hidden" id="words">
+    <div class="tool hidden" id="ai">
 
-    <h2>
-      🔢 الأرقام إلى كلمات
-    </h2>
+      <h2 id="aiTitle">
+        أداة ذكية
+      </h2>
 
-    <label>
-      أدخل رقماً
-      <input
-        id="numberInput"
-        type="number"
-        min="0"
-        max="999999999"
+      <textarea
+        id="aiText"
+        placeholder="اكتب النص أو الصق المحتوى هنا..."
+      ></textarea>
+
+      <button
+        class="btn"
+        type="button"
+        onclick="aiComingSoon()"
       >
-    </label>
+        تشغيل الأداة
+      </button>
 
-    <button class="btn" onclick="words()">
-      حوّل إلى كلمات
-    </button>
+      <div
+        id="aiResult"
+        class="result"
+      >
+        واجهة أداة الذكاء الاصطناعي جاهزة.
+        سيتم ربطها بالخدمة الذكية بشكل آمن لاحقاً.
+      </div>
 
-    <div id="wordsResult" class="result"></div>
-
-  </div>
+    </div>
 
 
+  </section>
 
-  <div class="tool hidden" id="counter">
+</section>
+
+
+<!-- =========================
+     عن الموقع
+========================= -->
+
+<section class="section about" id="about">
+
+  <div class="about-box">
 
     <h2>
-      📝 عداد الكلمات والحروف
+      نطوّر أدوات عربية مفيدة
     </h2>
 
-    <textarea
-      id="textInput"
-      placeholder="اكتب أو الصق النص هنا..."
-    ></textarea>
-
-    <div id="counterResult" class="result">
-      ابدأ بالكتابة لرؤية الإحصائيات.
-    </div>
-
-  </div>
-
-
-
-  <div class="tool hidden" id="ai">
-
-    <h2 id="aiTitle">
-      أداة ذكية
-    </h2>
-
-    <textarea
-      placeholder="اكتب النص أو الصق المحتوى هنا..."
-    ></textarea>
-
-    <button class="btn" type="button">
-      قريباً
-    </button>
-
-    <div class="result">
-      واجهة هذه الأداة جاهزة. سنربطها بالذكاء الاصطناعي بشكل آمن في المرحلة التالية.
-    </div>
+    <p>
+      منصة واحدة تجمع أدوات مجانية وسريعة
+      للكتابة والدراسة والحسابات والبرمجة،
+      مع تجربة بسيطة تعمل على الهاتف والكمبيوتر.
+    </p>
 
   </div>
 
 </section>
 
 
-
-<section class="about" id="about">
-
-  <h2>
-    نطوّر أدوات عربية مفيدة
-  </h2>
-
-  <p>
-    واجهة واحدة نظيفة وسريعة وتعمل على الهاتف والكمبيوتر.
-  </p>
-
-</section>
-
-</main>
-
-
+<!-- =========================
+     Footer
+========================= -->
 
 <footer>
 
-  © <span id="year"></span>
-  أدواتي — صُمم لتجربة عربية أسهل.
-  <span class="flag">🇮🇶</span>
+  ©
+  <span id="year"></span>
 
-  <br>
+  <strong>
+    أدواتي
+  </strong>
+
+  — صُمم لتجربة عربية أسهل.
+
+  🇮🇶
+
+  <br><br>
 
   قبلة المطوّر
 
 </footer>
 
 
+</div>
+
+
+<!-- =========================
+     Login
+========================= -->
+
+<div
+  class="login-modal"
+  id="loginModal"
+  onclick="closeLoginOutside(event)"
+>
+
+  <div
+    class="login-box"
+    onclick="event.stopPropagation()"
+  >
+
+    <button
+      class="close-login"
+      onclick="closeLogin()"
+    >
+      ×
+    </button>
+
+    <h2>
+      🔐 تسجيل الدخول
+    </h2>
+
+    <p style="color:#999">
+      سجّل دخولك للوصول إلى حسابك.
+    </p>
+
+    <label>
+      البريد الإلكتروني
+
+      <input
+        type="email"
+        id="loginEmail"
+        placeholder="example@email.com"
+      >
+
+    </label>
+
+    <label>
+      كلمة المرور
+
+      <input
+        type="password"
+        id="loginPassword"
+        placeholder="كلمة المرور"
+      >
+
+    </label>
+
+    <button
+      class="btn login-submit"
+      onclick="loginDemo()"
+    >
+      تسجيل الدخول
+    </button>
+
+    <div
+      id="loginMessage"
+      class="result"
+      style="display:none"
+    ></div>
+
+  </div>
+
+</div>
+
 
 <script>
 
-/* ================================= */
-/* TMDB API */
-/* ================================= */
-
-/*
-  ضع هنا API Key جديد من TMDB
-*/
-
-const TMDB_API_KEY = 'a9a0979d9954cccbf5a2805c31ee89dc';
-
-
-/* ================================= */
-/* قسم الأفلام */
-/* ================================= */
-
-const movieSearch = document.getElementById('movieSearch');
-
-const movieGrid = document.getElementById('movieGrid');
-
-
-async function searchMovies(){
-
-  const query = movieSearch.value.trim();
-
-
-  if(!query){
-
-    movieGrid.innerHTML = `
-      <div class="movie-message">
-        اكتب اسم الفيلم أولاً 🎬
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  movieGrid.innerHTML = `
-    <div class="movie-loading">
-      جاري البحث عن الأفلام...
-    </div>
-  `;
-
-
-  try{
-
-    const url =
-      `https://api.themoviedb.org/3/search/movie` +
-      `?api_key=${TMDB_API_KEY}` +
-      `&query=${encodeURIComponent(query)}` +
-      `&language=ar-SA` +
-      `&include_adult=false`;
-
-
-    const response = await fetch(url);
-
-
-    if(!response.ok){
-
-      throw new Error('TMDB API Error');
-
-    }
-
-
-    const data = await response.json();
-
-
-    if(!data.results || data.results.length === 0){
-
-      movieGrid.innerHTML = `
-        <div class="movie-message">
-          ما لقيت أفلام بهذا الاسم 😔
-        </div>
-      `;
-
-      return;
-
-    }
-
-
-    movieGrid.innerHTML = data.results
-      .slice(0,20)
-      .map(movie => {
-
-
-        const poster = movie.poster_path
-
-          ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-
-          : 'https://via.placeholder.com/500x750?text=No+Poster';
-
-
-        const title =
-          movie.title || 'بدون عنوان';
-
-
-        const year =
-          movie.release_date
-            ? movie.release_date.slice(0,4)
-            : 'غير معروف';
-
-
-        const rating =
-          movie.vote_average
-            ? movie.vote_average.toFixed(1)
-            : '0.0';
-
-
-        return `
-
-          <article class="movie-card">
-
-            <img
-              src="${poster}"
-              alt="${title}"
-              loading="lazy"
-            >
-
-            <div class="movie-info">
-
-              <h3>
-                ${title}
-              </h3>
-
-              <p>
-                📅 ${year}
-                &nbsp;
-                ⭐ ${rating}
-              </p>
-
-            </div>
-
-          </article>
-
-        `;
-
-      })
-      .join('');
-
-
-  }catch(error){
-
-    console.error(error);
-
-
-    movieGrid.innerHTML = `
-
-      <div class="movie-message">
-        صار خطأ أثناء جلب الأفلام.
-      </div>
-
-    `;
-
-  }
-
-}
-
-
-/* البحث عند الضغط على Enter */
-
-movieSearch.addEventListener(
-  'keydown',
-  function(e){
-
-    if(e.key === 'Enter'){
-
-      searchMovies();
-
-    }
-
-  }
-);
-
-
-
-/* ================================= */
-/* الأدوات */
-/* ================================= */
+/* =========================
+   بيانات الأدوات
+========================= */
 
 const data = [
 
@@ -1187,159 +1453,194 @@ const data = [
 ];
 
 
-let cat = 'all';
+/* =========================
+   عناصر الصفحة
+========================= */
 
+let cat = 'all';
 
 const grid =
   document.querySelector('#grid');
 
-
 const search =
   document.querySelector('#search');
-
-
-const count =
-  document.querySelector('#count');
-
 
 const panel =
   document.querySelector('#panel');
 
 
+/* =========================
+   عرض الأدوات
+========================= */
+
 function render(){
 
-  let q =
-    search.value.toLowerCase();
+  const q =
+    search.value
+      .toLowerCase()
+      .trim();
 
+  const filtered =
+    data.filter(a => {
 
-  let x =
-    data.filter(a =>
+      const categoryOK =
+        cat === 'all' ||
+        a[1] === cat;
 
-      (cat === 'all' || a[1] === cat) &&
+      const textOK =
+        a.slice(2)
+          .join(' ')
+          .toLowerCase()
+          .includes(q);
 
-      a.slice(2)
-        .join(' ')
-        .toLowerCase()
-        .includes(q)
+      return categoryOK && textOK;
 
-    );
+    });
 
 
   grid.innerHTML =
+    filtered.map(a => {
 
-    x.map(a => `
+      const tag =
+        a[1] === 'daily'
+          ? 'أدوات يومية'
+          : a[1] === 'writing'
+          ? 'الكتابة'
+          : a[1] === 'study'
+          ? 'الدراسة'
+          : 'البرمجة';
 
-      <article
-        class="card"
-        data-id="${a[0]}"
-        data-name="${a[3]}"
-      >
+      return `
 
-        <div class="icon">
-          ${a[2]}
-        </div>
+        <article
+          class="card"
+          data-id="${a[0]}"
+          data-name="${a[3]}"
+        >
 
-        <h3>
-          ${a[3]}
-        </h3>
+          <div class="icon">
+            ${a[2]}
+          </div>
 
-        <p>
-          ${a[4]}
-        </p>
+          <h3>
+            ${a[3]}
+          </h3>
 
-        <span class="tag">
+          <p>
+            ${a[4]}
+          </p>
 
-          ${
-            a[1] === 'daily'
-              ? 'أدوات يومية'
-              : a[1] === 'writing'
-              ? 'الكتابة'
-              : a[1] === 'study'
-              ? 'الدراسة'
-              : 'البرمجة'
-          }
+          <span class="tag">
+            ${tag}
+          </span>
 
-        </span>
+        </article>
 
-      </article>
+      `;
 
-    `).join('');
-
-
-  count.textContent =
-    `${x.length} أداة`;
+    }).join('');
 
 
   document
     .querySelectorAll('.card')
-    .forEach(c =>
+    .forEach(card => {
 
-      c.onclick = () => open(c)
+      card.onclick = () => {
 
-    );
+        openTool(card);
+
+      };
+
+    });
 
 }
 
 
-function open(c){
+/* =========================
+   فتح الأداة
+========================= */
+
+function openTool(card){
 
   document
     .querySelectorAll('.tool')
-    .forEach(x =>
-      x.classList.add('hidden')
-    );
+    .forEach(tool => {
+
+      tool.classList.add('hidden');
+
+    });
 
 
-  let id =
-    c.dataset.id === 'ai'
+  const id =
+    card.dataset.id === 'ai'
       ? 'ai'
-      : c.dataset.id;
+      : card.dataset.id;
 
 
-  document
-    .querySelector('#' + id)
-    .classList.remove('hidden');
+  const target =
+    document.querySelector('#' + id);
+
+
+  if(!target){
+    return;
+  }
+
+
+  target.classList.remove('hidden');
 
 
   if(id === 'ai'){
 
-    document
-      .querySelector('#aiTitle')
+    document.querySelector('#aiTitle')
       .textContent =
-      c.dataset.name;
+      card.dataset.name;
+
+    document.querySelector('#aiResult')
+      .textContent =
+      'الأداة جاهزة. سيتم تشغيل الذكاء الاصطناعي بعد ربط الخدمة بشكل آمن.';
 
   }
 
 
   panel.scrollIntoView({
-    behavior:'smooth'
+    behavior:'smooth',
+    block:'start'
   });
 
 }
 
 
-search.oninput =
-  render;
+/* =========================
+   البحث
+========================= */
 
+search.oninput = render;
+
+
+/* =========================
+   التصنيفات
+========================= */
 
 document
   .querySelectorAll('.cat')
-  .forEach(b => {
+  .forEach(button => {
 
-    b.onclick = () => {
+    button.onclick = () => {
 
       cat =
-        b.dataset.c;
+        button.dataset.c;
 
 
       document
         .querySelectorAll('.cat')
-        .forEach(x =>
+        .forEach(x => {
+
           x.classList.toggle(
             'active',
-            x === b
-          )
-        );
+            x === button
+          );
+
+        });
 
 
       render();
@@ -1349,53 +1650,49 @@ document
   });
 
 
-render();
+/* =========================
+   حاسبة العمر
+========================= */
 
-
-
-/* ================================= */
-/* حاسبة العمر */
-/* ================================= */
-
-document
-  .querySelector('#ageAt')
-  .value =
+document.querySelector('#ageAt').value =
   new Date()
     .toISOString()
     .slice(0,10);
 
 
-document
-  .querySelector('#year')
-  .textContent =
-  new Date().getFullYear();
-
-
 function calcAge(){
 
-  let b =
-    new Date(
-      document.querySelector('#birth').value
-    );
+  const birthValue =
+    document.querySelector('#birth').value;
 
-
-  let e =
-    new Date(
-      document.querySelector('#ageAt').value
-    );
-
+  const endValue =
+    document.querySelector('#ageAt').value;
 
   const result =
     document.querySelector('#ageResult');
 
 
-  if(
-    !document.querySelector('#birth').value ||
-    e < b
-  ){
+  if(!birthValue || !endValue){
 
     result.textContent =
-      'أدخل تاريخاً صحيحاً.';
+      'أدخل تاريخ الميلاد والتاريخ المطلوب.';
+
+    return;
+
+  }
+
+
+  const b =
+    new Date(birthValue);
+
+  const e =
+    new Date(endValue);
+
+
+  if(e < b){
+
+    result.textContent =
+      'التاريخ المطلوب يجب أن يكون بعد تاريخ الميلاد.';
 
     return;
 
@@ -1406,11 +1703,9 @@ function calcAge(){
     e.getFullYear() -
     b.getFullYear();
 
-
   let m =
     e.getMonth() -
     b.getMonth();
-
 
   let d =
     e.getDate() -
@@ -1446,20 +1741,17 @@ function calcAge(){
 }
 
 
-
-/* ================================= */
-/* الفرق بين تاريخين */
-/* ================================= */
+/* =========================
+   الفرق بين تاريخين
+========================= */
 
 function calcDate(){
 
   const d1 =
     document.querySelector('#date1').value;
 
-
   const d2 =
     document.querySelector('#date2').value;
-
 
   const result =
     document.querySelector('#dateResult');
@@ -1475,47 +1767,52 @@ function calcDate(){
   }
 
 
-  let d =
+  const start =
+    new Date(d1);
+
+  const end =
+    new Date(d2);
+
+
+  const diff =
     Math.round(
-      Math.abs(
-        new Date(d2) -
-        new Date(d1)
-      ) / 86400000
+      Math.abs(end - start)
+      / 86400000
     );
 
 
   result.innerHTML =
-    `الفرق: <b>${d}</b> يوم.`;
+    `الفرق: <b>${diff}</b> يوم.`;
 
 }
 
 
-
-/* ================================= */
-/* محول العملات */
-/* ================================= */
+/* =========================
+   محول العملات
+========================= */
 
 function convert(){
 
-  let a =
-    +document.querySelector('#amount').value;
+  const amount =
+    Number(
+      document.querySelector('#amount').value
+    );
 
+  const rate =
+    Number(
+      document.querySelector('#rate').value
+    );
 
-  let r =
-    +document.querySelector('#rate').value;
-
+  const to =
+    document.querySelector('#to').value;
 
   const result =
     document.querySelector('#currencyResult');
 
 
-  const to =
-    document.querySelector('#to').value;
-
-
   if(
-    !Number.isFinite(a) ||
-    !Number.isFinite(r)
+    !Number.isFinite(amount) ||
+    !Number.isFinite(rate)
   ){
 
     result.textContent =
@@ -1527,15 +1824,14 @@ function convert(){
 
 
   result.innerHTML =
-    `النتيجة: <b>${(a*r).toLocaleString('ar-IQ')}</b> ${to}`;
+    `النتيجة: <b>${(amount * rate).toLocaleString('ar-IQ')}</b> ${to}`;
 
 }
 
 
-
-/* ================================= */
-/* الأرقام إلى كلمات */
-/* ================================= */
+/* =========================
+   الأرقام إلى كلمات
+========================= */
 
 const O = [
 
@@ -1597,22 +1893,24 @@ const H = [
 
 function u(n){
 
-  if(n < 20)
+  if(n < 20){
     return O[n];
+  }
 
 
-  if(n < 100)
+  if(n < 100){
 
     return n % 10
-      ? O[n % 10] +
-        ' و' +
-        T[Math.floor(n / 10)]
-
+      ? O[n % 10]
+        + ' و'
+        + T[Math.floor(n / 10)]
       : T[Math.floor(n / 10)];
 
+  }
 
-  return H[Math.floor(n / 100)] +
 
+  return H[Math.floor(n / 100)]
+    +
     (
       n % 100
         ? ' و' + u(n % 100)
@@ -1624,23 +1922,24 @@ function u(n){
 
 function ntw(n){
 
-  if(!n)
+  if(!n){
     return 'صفر';
+  }
 
 
-  if(n < 1000)
+  if(n < 1000){
     return u(n);
+  }
 
 
-  let k =
+  const k =
     Math.floor(n / 1000);
 
-
-  let r =
+  const r =
     n % 1000;
 
 
-  let s =
+  const s =
     k === 1
       ? 'ألف'
       : k === 2
@@ -1659,11 +1958,10 @@ function ntw(n){
 
 function words(){
 
-  let n =
-    +document
-      .querySelector('#numberInput')
-      .value;
-
+  const n =
+    Number(
+      document.querySelector('#numberInput').value
+    );
 
   const result =
     document.querySelector('#wordsResult');
@@ -1689,39 +1987,157 @@ function words(){
 }
 
 
-
-/* ================================= */
-/* عداد الكلمات والحروف */
-/* ================================= */
+/* =========================
+   عداد الكلمات والحروف
+========================= */
 
 document
   .querySelector('#textInput')
   .oninput = () => {
 
-
-    let t =
-      document
-        .querySelector('#textInput')
+    const text =
+      document.querySelector('#textInput')
         .value;
 
 
-    let w =
-      t.trim()
-        ? t.trim().split(/\s+/).length
+    const wordsCount =
+      text.trim()
+        ? text.trim().split(/\s+/).length
         : 0;
+
+
+    const chars =
+      text.replace(/\s/g,'').length;
+
+
+    const spaces =
+      (text.match(/\s/g) || []).length;
 
 
     document
       .querySelector('#counterResult')
       .innerHTML =
-
-      `الكلمات: <b>${w}</b> — الحروف: <b>${
-        t.replace(/\s/g,'').length
-      }</b>`;
+      `الكلمات: <b>${wordsCount}</b>
+       — الحروف: <b>${chars}</b>
+       — المسافات: <b>${spaces}</b>`;
 
   };
 
+
+/* =========================
+   الذكاء الاصطناعي
+========================= */
+
+function aiComingSoon(){
+
+  const result =
+    document.querySelector('#aiResult');
+
+  const text =
+    document.querySelector('#aiText').value.trim();
+
+
+  if(!text){
+
+    result.textContent =
+      'اكتب النص أولاً.';
+
+    return;
+
+  }
+
+
+  result.textContent =
+    'واجهة الذكاء الاصطناعي جاهزة، وسيتم ربطها بالخدمة الآمنة في المرحلة القادمة.';
+
+}
+
+
+/* =========================
+   تسجيل الدخول
+========================= */
+
+function openLogin(){
+
+  document
+    .querySelector('#loginModal')
+    .classList.add('show');
+
+}
+
+
+function closeLogin(){
+
+  document
+    .querySelector('#loginModal')
+    .classList.remove('show');
+
+}
+
+
+function closeLoginOutside(event){
+
+  if(
+    event.target.id === 'loginModal'
+  ){
+
+    closeLogin();
+
+  }
+
+}
+
+
+function loginDemo(){
+
+  const message =
+    document.querySelector('#loginMessage');
+
+  message.style.display =
+    'block';
+
+  message.textContent =
+    'نظام تسجيل الدخول سيتم تفعيله لاحقاً.';
+
+}
+
+
+/* =========================
+   السنة
+========================= */
+
+document.querySelector('#year')
+  .textContent =
+  new Date().getFullYear();
+
+
+/* =========================
+   تشغيل الأدوات
+========================= */
+
+render();
+
+
+/* =========================
+   زر Escape لإغلاق الدخول
+========================= */
+
+document.addEventListener(
+  'keydown',
+  event => {
+
+    if(event.key === 'Escape'){
+
+      closeLogin();
+
+    }
+
+  }
+);
+
 </script>
 
+
 </body>
+
 </html>
