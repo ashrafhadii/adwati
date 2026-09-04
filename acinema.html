@@ -948,9 +948,69 @@ footer strong{
   <strong>ACinema</strong>
   <br>
   منصة لاكتشاف الأفلام والمسلسلات
+
+  <div class="footer-flags" aria-label="العراق وكردستان">
+    <span class="flag flag-iraq" title="العراق"></span>
+    <span class="flag flag-kurdistan" title="كردستان"></span>
+  </div>
+
+  <div class="footer-credit">
+    قبلة المطوّر
+  </div>
 </footer>
 
+.footer-flags{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  margin:18px 0 12px;
+  direction:ltr;
+}
 
+.flag{
+  width:44px;
+  height:29px;
+  border-radius:5px;
+  display:inline-block;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 0 0 1px rgba(255,255,255,.15);
+}
+
+.flag-iraq{
+  background:linear-gradient(
+    to bottom,
+    #ce1126 0 33.33%,
+    #fff 33.33% 66.66%,
+    #000 66.66% 100%
+  );
+}
+
+.flag-kurdistan{
+  background:linear-gradient(
+    to bottom,
+    #ed1c24 0 33.33%,
+    #fff 33.33% 66.66%,
+    #00a651 66.66% 100%
+  );
+}
+
+.flag-kurdistan::after{
+  content:"☀";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-54%);
+  color:#f6c900;
+  font-size:17px;
+  line-height:1;
+}
+
+.footer-credit{
+  margin-top:4px;
+  color:#888;
+}
 <!-- ================= DETAILS MODAL ================= -->
 
 <div class="modal" id="detailsModal">
