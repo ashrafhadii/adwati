@@ -657,52 +657,6 @@ footer strong{
   color:var(--gold);
 }
 
-.footer-flags{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:10px;
-  margin:14px 0 10px;
-}
-
-.flag{
-  width:42px;
-  height:28px;
-  border-radius:5px;
-  border:1px solid #333;
-  position:relative;
-  overflow:hidden;
-  display:inline-block;
-  box-shadow:0 2px 8px rgba(0,0,0,.35);
-}
-
-.flag-iraq{
-  background:linear-gradient(to bottom,#ce1126 0 33.33%,#fff 33.33% 66.66%,#000 66.66% 100%);
-}
-
-.flag-kurdistan{
-  background:linear-gradient(to bottom,#ed1c24 0 33.33%,#fff 33.33% 66.66%,#078a3b 66.66% 100%);
-}
-
-.flag-kurdistan::before{
-  content:"☀";
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#f6d32d;
-  font-size:18px;
-  line-height:1;
-  text-shadow:0 0 2px rgba(0,0,0,.25);
-}
-
-.footer-credit{
-  color:var(--gold);
-  font-weight:bold;
-  margin-top:4px;
-}
-
 /* ================= RESPONSIVE ================= */
 
 @media(max-width:1200px){
@@ -994,13 +948,6 @@ footer strong{
   <strong>ACinema</strong>
   <br>
   منصة لاكتشاف الأفلام والمسلسلات
-
-  <div class="footer-flags" aria-label="العراق وكردستان">
-    <span class="flag flag-iraq" title="العراق"></span>
-    <span class="flag flag-kurdistan" title="كردستان"></span>
-  </div>
-
-  <div class="footer-credit">قبلة المطوّر</div>
 </footer>
 
 
@@ -1139,7 +1086,7 @@ footer strong{
    https://acinema-api.xxxxx.workers.dev
 */
 
-const API_BASE = "https://acinema-api.ashraf75hadii.workers.dev";
+const API_BASE = "https://YOUR-WORKER.workers.dev";
 
 
 const API_URL = API_BASE.replace(/\/$/, "");
@@ -1250,21 +1197,8 @@ async function loadCatalog(){
 
     if(!response.ok){
 
-      let apiError = "";
-
-      try{
-        const errorData = await response.json();
-
-        apiError =
-          errorData?.details ||
-          errorData?.error ||
-          "";
-      }catch{}
-
       throw new Error(
-        "API Error: " +
-        response.status +
-        (apiError ? " - " + apiError : "")
+        "API Error: " + response.status
       );
 
     }
