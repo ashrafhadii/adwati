@@ -32,6 +32,17 @@ const LANGUAGES = {
   pt: "البرتغالية"
 };
 
+/*
+  عدد العناصر التي نجلب تفاصيلها الكاملة
+  من كل نوع (أفلام / مسلسلات) في كل طلب كتالوج.
+
+  ملاحظة مهمة:
+  خطة Cloudflare Workers المجانية تسمح
+  بحد أقصى 50 subrequest لكل طلب واحد.
+  لذلك يجب ألا يتجاوز المجموع هذا الرقم.
+*/
+const ITEMS_PER_TYPE = 12;
+
 
 function corsHeaders(request){
 
@@ -193,37 +204,27 @@ async function tmdb(path,params,env){
 }
 
 
-async function getCredits(
-  type,
-  id,
-  env
-){
-
-  return tmdb(
-    `/${type}/${id}/credits`,
-    {
-      language:"ar-SA"
-    },
-    env
-  );
-
-}
-
-
+/*
+  makeDetails الآن تقرأ الـ cast/crew
+  من نفس استجابة التفاصيل (بفضل append_to_response=credits)
+  بدل عمل طلب منفصل — هذا يقلل عدد الـ subrequests للنصف.
+*/
 function makeDetails(
   item,
-  type,
-  credits
+  type
 ){
 
   const isTV =
     type === "tv";
 
+  const credits =
+    item.credits || { cast:[], crew:[] };
+
 
   let director = [];
 
 
-  if(Array.isArray(credits?.crew)){
+  if(Array.isArray(credits.crew)){
 
     director =
       credits.crew
@@ -265,7 +266,7 @@ function makeDetails(
 
 
   const cast =
-    Array.isArray(credits?.cast)
+    Array.isArray(credits.cast)
       ? credits.cast
           .slice(0,20)
           .map(person => ({
@@ -391,6 +392,10 @@ function makeDetails(
 }
 
 
+/*
+  طلب واحد فقط لكل عنصر بدل طلبين
+  (details + credits) بفضل append_to_response.
+*/
 async function getDetails(
   type,
   id,
@@ -401,38 +406,16 @@ async function getDetails(
     await tmdb(
       `/${type}/${id}`,
       {
-        language:"ar-SA"
+        language:"ar-SA",
+        append_to_response:"credits"
       },
       env
     );
 
 
-  let credits;
-
-
-  try{
-
-    credits =
-      await getCredits(
-        type,
-        id,
-        env
-      );
-
-  }catch{
-
-    credits = {
-      cast:[],
-      crew:[]
-    };
-
-  }
-
-
   return makeDetails(
     item,
-    type,
-    credits
+    type
   );
 
 }
@@ -519,38 +502,45 @@ async function handleCatalog(
 
 
     /*
-      نأخذ أول 12 من كل نوع
-      حتى لا نرسل عددًا ضخمًا من
-      طلبات التفاصيل في كل مرة.
+      نأخذ أول ITEMS_PER_TYPE من كل نوع
+      حتى لا نتجاوز حد الـ subrequests
+      المسموح به في خطة Cloudflare المجانية (50).
+
+      1 طلب discover + (ITEMS_PER_TYPE × 1 طلب تفاصيل)
+      لكل نوع × نوعين (أفلام/مسلسلات) يجب أن يبقى
+      أقل من 50 بأمان.
     */
 
     const limited =
-      basicItems.slice(0,12);
+      basicItems.slice(0,ITEMS_PER_TYPE);
 
 
-    for(
-      const basic of limited
-    ){
+    const settled =
+      await Promise.allSettled(
+        limited.map(
+          basic =>
+            getDetails(
+              currentType,
+              basic.id,
+              env
+            )
+        )
+      );
 
-      try{
 
-        const details =
-          await getDetails(
-            currentType,
-            basic.id,
-            env
-          );
+    for(const outcome of settled){
 
+      if(outcome.status === "fulfilled"){
 
-        results.push(details);
+        results.push(outcome.value);
 
-      }catch(error){
+      }else{
 
         console.error(
           "Details error:",
           currentType,
-          basic.id,
-          error.message
+          outcome.reason?.message ||
+            outcome.reason
         );
 
       }
@@ -643,34 +633,38 @@ async function handleSearch(
     );
 
 
+  const limited =
+    valid.slice(0,ITEMS_PER_TYPE);
+
+
+  const settled =
+    await Promise.allSettled(
+      limited.map(
+        item =>
+          getDetails(
+            item.media_type,
+            item.id,
+            env
+          )
+      )
+    );
+
+
   const items = [];
 
 
-  /*
-    التفاصيل من السيرفر،
-    وليس من المتصفح.
-  */
+  for(const outcome of settled){
 
-  for(
-    const item of valid.slice(0,12)
-  ){
+    if(outcome.status === "fulfilled"){
 
-    try{
+      items.push(outcome.value);
 
-      const details =
-        await getDetails(
-          item.media_type,
-          item.id,
-          env
-        );
-
-      items.push(details);
-
-    }catch(error){
+    }else{
 
       console.error(
         "Search details error:",
-        error.message
+        outcome.reason?.message ||
+          outcome.reason
       );
 
     }
@@ -814,50 +808,52 @@ export default {
       }
 
 
-   if(url.pathname === "/search"){
+      if(url.pathname === "/search"){
 
-    return await handleSearch(
-      request,
-      env
-    );
+        return await handleSearch(
+          request,
+          env
+        );
+
+      }
+
+
+      if(url.pathname === "/details"){
+
+        return await handleDetails(
+          request,
+          env
+        );
+
+      }
+
+
+      return json(
+        {
+          error: "Not found"
+        },
+        404,
+        request
+      );
+
+
+    }catch(error){
+
+      console.error(
+        error
+      );
+
+      return json(
+        {
+          error: "API request failed",
+          details: error?.message || String(error)
+        },
+        500,
+        request
+      );
+
+    }
 
   }
-
-
-  if(url.pathname === "/details"){
-
-    return await handleDetails(
-      request,
-      env
-    );
-
-  }
-
-
-  return json(
-    {
-      error: "Not found"
-    },
-    404,
-    request
-  );
-
-
-}catch(error){
-
-  console.error(
-    error
-  );
-
-  return json(
-    {
-      error: "API request failed",
-      details: error?.message || String(error)
-    },
-    500,
-    request
-  );
-
-}
 
 };
