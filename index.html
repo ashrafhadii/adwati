@@ -580,6 +580,74 @@ footer strong{
   color:var(--gold);
 }
 
+/* أعلام المطور */
+
+.developer-flags{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  margin-top:15px;
+}
+
+.developer-flag{
+  width:55px;
+  height:35px;
+  border-radius:5px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 0 10px rgba(212,175,55,.15);
+}
+
+/* علم العراق */
+
+.flag-iraq{
+  background:
+    linear-gradient(
+      to bottom,
+      #ce1126 0 33.33%,
+      #fff 33.33% 66.66%,
+      #000 66.66% 100%
+    );
+}
+
+.flag-iraq::after{
+  content:"الله أكبر";
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#178a3b;
+  font-size:7px;
+  font-weight:bold;
+  direction:rtl;
+}
+
+/* علم كردستان */
+
+.flag-kurdistan{
+  background:
+    linear-gradient(
+      to bottom,
+      #ed1c24 0 33.33%,
+      #fff 33.33% 66.66%,
+      #078930 66.66% 100%
+    );
+}
+
+.flag-kurdistan::after{
+  content:"☀";
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#f6c900;
+  font-size:23px;
+  line-height:1;
+}
+
 /* =========================
    Login Modal
 ========================= */
@@ -736,8 +804,12 @@ footer strong{
     padding:35px 18px;
   }
 
-}
+  .developer-flag{
+    width:50px;
+    height:32px;
+  }
 
+}
 
 /* =========================
    أدوات الأفلام القديمة
@@ -1200,11 +1272,23 @@ footer strong{
 
   — صُمم لتجربة عربية أسهل.
 
-  🇮🇶
-
   <br><br>
 
   قبلة المطوّر
+
+  <div class="developer-flags">
+
+    <div
+      class="developer-flag flag-iraq"
+      title="العراق"
+    ></div>
+
+    <div
+      class="developer-flag flag-kurdistan"
+      title="كردستان"
+    ></div>
+
+  </div>
 
 </footer>
 
