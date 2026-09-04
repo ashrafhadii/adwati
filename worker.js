@@ -826,10 +826,14 @@ export default {
 
       if(url.pathname === "/details"){
 
-        return await handleDetails(
-          request,
-          env
-        );
+       return json(
+  {
+    error: "API request failed",
+    details: error?.message || String(error)
+  },
+  500,
+  request
+);
 
       }
 
