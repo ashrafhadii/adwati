@@ -814,57 +814,50 @@ export default {
       }
 
 
-      if(url.pathname === "/search"){
+   if(url.pathname === "/search"){
 
-        return await handleSearch(
-          request,
-          env
-        );
-
-      }
-
-
-      if(url.pathname === "/details"){
-
-       return json(
-  {
-    error: "API request failed",
-    details: error?.message || String(error)
-  },
-  500,
-  request
-);
-
-      }
-
-
-      return json(
-        {
-          error:"Not found"
-        },
-        404,
-        request
-      );
-
-
-    }catch(error){
-
-      console.error(
-        error
-      );
-
-
-      return json(
-        {
-          error:
-            "API request failed"
-        },
-        500,
-        request
-      );
-
-    }
+    return await handleSearch(
+      request,
+      env
+    );
 
   }
+
+
+  if(url.pathname === "/details"){
+
+    return await handleDetails(
+      request,
+      env
+    );
+
+  }
+
+
+  return json(
+    {
+      error: "Not found"
+    },
+    404,
+    request
+  );
+
+
+}catch(error){
+
+  console.error(
+    error
+  );
+
+  return json(
+    {
+      error: "API request failed",
+      details: error?.message || String(error)
+    },
+    500,
+    request
+  );
+
+}
 
 };
